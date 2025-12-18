@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎌 Anime Bot - Your Ultimate Anime Companion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-robot"></i>
+                <span>Anime Bot</span>
+            </a>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="#features" class="nav-link"><i class="fas fa-star"></i> Features</a>
+                <a href="#commands" class="nav-link"><i class="fas fa-terminal"></i> Commands</a>
+                <a href="#invite" class="nav-link"><i class="fas fa-plus-circle"></i> Invite</a>
+                <a href="#support" class="nav-link"><i class="fas fa-heart"></i> Support</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Anime Bot</span>
+                    <br>Your Ultimate Anime Companion
+                </h1>
+                <p class="hero-subtitle">The most feature-rich anime Discord bot with episode alerts, character search, news updates, AFK system, and powerful moderation tools.</p>
+                <div class="hero-buttons">
+                    <a href="#invite" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Invite to Server
+                    </a>
+                    <a href="#commands" class="btn btn-secondary">
+                        <i class="fas fa-list"></i> View Commands
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <i class="fas fa-server"></i>
+                        <div>
+                            <span class="stat-number" id="server-count">100+</span>
+                            <span class="stat-label">Servers</span>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-terminal"></i>
+                        <div>
+                            <span class="stat-number" id="command-count">50+</span>
+                            <span class="stat-label">Commands</span>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <span class="stat-number" id="user-count">10K+</span>
+                            <span class="stat-label">Users</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="anime-character">
+                    <img src="https://i.imgur.com/6GJbZ7S.png" alt="Anime Bot Character" class="character-img">
+                    <div class="floating-elements">
+                        <div class="float-el el1"><i class="fas fa-search"></i></div>
+                        <div class="float-el el2"><i class="fas fa-newspaper"></i></div>
+                        <div class="float-el el3"><i class="fas fa-shield-alt"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">✨ <span class="highlight">Features</span> ✨</h2>
+            <p class="section-subtitle">Everything you need for your anime community</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3>Anime Search</h3>
+                    <p>Search thousands of anime with detailed information, ratings, and synopsis using Jikan API.</p>
+                    <div class="feature-tags">
+                        <span class="tag">/anime</span>
+                        <span class="tag">/character</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Episode Alerts</h3>
+                    <p>Automatic notifications when new episodes are released. Never miss your favorite anime!</p>
+                    <div class="feature-tags">
+                        <span class="tag">Auto System</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3>Anime News</h3>
+                    <p>Latest anime news from AnimeTV JP with images and automatic channel updates.</p>
+                    <div class="feature-tags">
+                        <span class="tag">/news</span>
+                        <span class="tag">Auto News</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-clock"></i>
+                    </div>
+                    <h3>AFK System</h3>
+                    <p>Server-specific AFK with nickname changes and auto-return detection.</p>
+                    <div class="feature-tags">
+                        <span class="tag">/afk</span>
+                        <span class="tag">Persistent</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>AutoMod System</h3>
+                    <p>Advanced word filtering with racist detection, warnings, and customizable settings.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Cloudflare</span>
+                        <span class="tag">Customizable</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Admin Tools</h3>
+                    <p>Whitelist system, custom prefixes, channel management, and detailed server statistics.</p>
+                    <div class="feature-tags">
+                        <span class="tag">/whitelist</span>
+                        <span class="tag">/adminstats</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commands Section -->
+    <section id="commands" class="commands">
+        <div class="container">
+            <h2 class="section-title">🎮 <span class="highlight">Commands</span> 🎮</h2>
+            <p class="section-subtitle">Use prefix <code>?</code> or slash commands <code>/</code></p>
+            
+            <div class="commands-tabs">
+                <button class="tab-btn active" data-tab="general">General</button>
+                <button class="tab-btn" data-tab="anime">Anime Search</button>
+                <button class="tab-btn" data-tab="afk">AFK System</button>
+                <button class="tab-btn" data-tab="admin">Admin Commands</button>
+                <button class="tab-btn" data-tab="automod">AutoMod</button>
+            </div>
+            
+            <div class="commands-content">
+                <!-- General Commands -->
+                <div class="tab-content active" id="general">
+                    <div class="command-list">
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/help</span>
+                                <span class="command-desc">Show this help website</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?help</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/stats</span>
+                                <span class="command-desc">View bot statistics</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?stats</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/ping</span>
+                                <span class="command-desc">Check bot latency</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?ping</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/invite</span>
+                                <span class="command-desc">Get bot invite link</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?invite</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/meme</span>
+                                <span class="command-desc">Get random anime meme</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?meme</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/news</span>
+                                <span class="command-desc">Latest anime news from AnimeTV JP</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?news</code></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Anime Search Commands -->
+                <div class="tab-content" id="anime">
+                    <div class="command-list">
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/anime &lt;title&gt;</span>
+                                <span class="command-desc">Search for anime details</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?anime One Piece</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/character &lt;name&gt;</span>
+                                <span class="command-desc">Search for character info</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?character Naruto</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/characters &lt;anime&gt;</span>
+                                <span class="command-desc">Get characters from anime</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?chars Attack on Titan</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/random</span>
+                                <span class="command-desc">Get random anime</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?random</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/schedule</span>
+                                <span class="command-desc">Weekly anime schedule</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?schedule</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/recommend &lt;anime&gt;</span>
+                                <span class="command-desc">Get anime recommendations</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?recommend Demon Slayer</code></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AFK Commands -->
+                <div class="tab-content" id="afk">
+                    <div class="command-list">
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/afk [reason]</span>
+                                <span class="command-desc">Set your AFK status</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?afk Sleeping</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/afkstatus</span>
+                                <span class="command-desc">Check who is AFK</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?afkstatus</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/afklist</span>
+                                <span class="command-desc">View all AFK users (Admin)</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?afklist</code></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Admin Commands -->
+                <div class="tab-content" id="admin">
+                    <div class="command-note">
+                        <i class="fas fa-shield-alt"></i> These commands require <strong>Server Owner</strong> or <strong>Whitelisted Admin</strong> permissions
+                    </div>
+                    <div class="command-list">
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/whitelist admins add @user</span>
+                                <span class="command-desc">Add admin to whitelist</span>
+                            </div>
+                            <div class="command-usage">Server Owner Only</div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/auto</span>
+                                <span class="command-desc">Enable episode alerts</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?auto</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/prefix &lt;char&gt;</span>
+                                <span class="command-desc">Set custom prefix</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?prefix !</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/adminstats</span>
+                                <span class="command-desc">View admin statistics</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?adminstats</code></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AutoMod Commands -->
+                <div class="tab-content" id="automod">
+                    <div class="command-list">
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/automod add &lt;words&gt;</span>
+                                <span class="command-desc">Add words to block list</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?automod add badword</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/automod list</span>
+                                <span class="command-desc">List blocked words</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?automod list</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/automod warnings [user]</span>
+                                <span class="command-desc">View user warnings</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?automod warnings</code></div>
+                        </div>
+                        
+                        <div class="command-item">
+                            <div class="command-header">
+                                <span class="command-name">/automod settings</span>
+                                <span class="command-desc">View AutoMod settings</span>
+                            </div>
+                            <div class="command-usage">Prefix: <code>?automod settings</code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Invite Section -->
+    <section id="invite" class="invite">
+        <div class="container">
+            <h2 class="section-title">🤖 <span class="highlight">Invite Anime Bot</span> 🤖</h2>
+            <p class="section-subtitle">Add the bot to your Discord server with one click</p>
+            
+            <div class="invite-card">
+                <div class="invite-content">
+                    <h3><i class="fas fa-robot"></i> Ready to Join?</h3>
+                    <p>Anime Bot comes with all permissions needed to function properly. You can review the permissions before adding.</p>
+                    
+                    <div class="permissions-list">
+                        <div class="permission">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Send Messages</span>
+                        </div>
+                        <div class="permission">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Embed Links</span>
+                        </div>
+                        <div class="permission">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Manage Messages</span>
+                        </div>
+                        <div class="permission">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Manage Nicknames</span>
+                        </div>
+                        <div class="permission">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Kick Members</span>
+                        </div>
+                        <div class="permission">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Add Reactions</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot%20applications.commands" 
+                       class="btn btn-primary btn-large" target="_blank">
+                        <i class="fas fa-plus"></i> Invite to Discord
+                    </a>
+                    
+                    <p class="note"><i class="fas fa-info-circle"></i> Replace <code>YOUR_CLIENT_ID</code> with your actual bot client ID</p>
+                </div>
+                <div class="invite-image">
+                    <img src="https://i.imgur.com/9Q7JQ9t.png" alt="Discord Bot Invite" class="discord-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="support">
+        <div class="container">
+            <h2 class="section-title">❤️ <span class="highlight">Support Development</span> ❤️</h2>
+            <p class="section-subtitle">Help keep the bot running and get premium features</p>
+            
+            <div class="support-cards">
+                <div class="support-card">
+                    <div class="support-icon paypal">
+                        <i class="fab fa-paypal"></i>
+                    </div>
+                    <h3>PayPal</h3>
+                    <p>One-time donation via PayPal to support development costs.</p>
+                    <a href="https://paypal.me/RenTakashidev/5USD" class="btn btn-outline" target="_blank">
+                        <i class="fas fa-donate"></i> Donate with PayPal
+                    </a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon kofi">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Ko-fi</h3>
+                    <p>Buy me a coffee! Monthly support with exclusive perks.</p>
+                    <a href="https://ko-fi.com/ani18" class="btn btn-outline" target="_blank">
+                        <i class="fas fa-mug-hot"></i> Support on Ko-fi
+                    </a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon discord">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <h3>Discord Server</h3>
+                    <p>Join our community for support, updates, and suggestions.</p>
+                    <a href="https://discord.gg/your-server" class="btn btn-outline" target="_blank">
+                        <i class="fas fa-users"></i> Join Discord
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-robot"></i> Anime Bot</h3>
+                    <p>The ultimate anime Discord bot with powerful features for your community.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#commands">Commands</a>
+                    <a href="#invite">Invite</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <a href="#">Documentation</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#support">Support</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Statistics</h3>
+                    <div class="footer-stats">
+                        <div><i class="fas fa-server"></i> <span>100+ Servers</span></div>
+                        <div><i class="fas fa-users"></i> <span>10K+ Users</span></div>
+                        <div><i class="fas fa-terminal"></i> <span>50+ Commands</span></div>
+                        <div><i class="fas fa-heartbeat"></i> <span>99.9% Uptime</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 Anime Bot. All rights reserved. | Made with <i class="fas fa-heart"></i> for anime communities</p>
+                <p>Not affiliated with MyAnimeList, Jikan API, or AnimeTV JP.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
