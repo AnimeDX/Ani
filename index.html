@@ -4,375 +4,294 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime Bot - Documentation & Commands</title>
-    <!-- Using a more appropriate anime-style favicon -->
+    <!-- Discord-like favicon -->
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1864/1864514.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ===== CSS RESET & VARIABLES ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Varela Round', 'Arial Rounded MT Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         :root {
-            --sakura-pink: #ff9ec0;
-            --anime-blue: #4a8fe7;
-            --anime-purple: #a66bf2;
-            --dark-night: #1a1a2e;
-            --cyber-teal: #00e5d9;
-            --neon-yellow: #ffde59;
-            --manga-white: #f5f7ff;
-            --manga-black: #0f0f1c;
-            --shadow-color: rgba(0, 0, 0, 0.4);
+            /* Modern color palette - Discord inspired */
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #2a2a2a;
+            --bg-accent: #36393f;
+            
+            /* Accent colors - Anime theme */
+            --accent-primary: #5865f2; /* Discord blurple */
+            --accent-secondary: #eb459e; /* Pink accent */
+            --accent-success: #57f287; /* Green */
+            --accent-warning: #fee75c; /* Yellow */
+            --accent-danger: #ed4245; /* Red */
+            
+            /* Text colors */
+            --text-primary: #ffffff;
+            --text-secondary: #b9bbbe;
+            --text-tertiary: #72767d;
+            
+            /* Borders & shadows */
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+            --border-radius-full: 9999px;
+            
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-medium: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* ===== BASE STYLES ===== */
         body {
-            background-color: var(--dark-night);
-            color: var(--manga-white);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 158, 192, 0.15) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(74, 143, 231, 0.15) 0%, transparent 20%),
-                radial-gradient(circle at 50% 50%, rgba(166, 107, 242, 0.1) 0%, transparent 30%);
-        }
-
-        /* Performance optimizations */
-        .anime-bg-element, .sparkle, .manga-speed-lines {
-            will-change: transform, opacity;
-            backface-visibility: hidden;
-        }
-
-        /* Anime-style Background Elements */
-        .anime-bg-element {
-            position: fixed;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.6;
-        }
-
-        .bg-sakura {
-            top: 10%;
-            left: 5%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, var(--sakura-pink) 0%, transparent 70%);
-            filter: blur(20px);
-            animation: float 8s infinite ease-in-out;
-        }
-
-        .bg-orb {
-            bottom: 15%;
-            right: 10%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, var(--cyber-teal) 0%, transparent 70%);
-            filter: blur(40px);
-            opacity: 0.4;
-            animation: pulse 12s infinite alternate;
-        }
-
-        .bg-sparkle {
-            top: 50%;
-            left: 20%;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, var(--neon-yellow) 0%, transparent 70%);
-            filter: blur(15px);
-            animation: sparkle 5s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.3; }
-            100% { transform: scale(1.2); opacity: 0.5; }
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
+            padding: 0 20px;
         }
 
-        /* Manga Panel Header */
-        header {
+        /* ===== SMOOTH ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+        }
+
+        @keyframes pulse-subtle {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            padding: 40px 0;
             text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.7));
-            border-radius: 20px;
-            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
             position: relative;
             overflow: hidden;
-            border: 3px solid var(--anime-blue);
-            box-shadow: 
-                0 10px 30px var(--shadow-color),
-                inset 0 0 30px rgba(74, 143, 231, 0.3);
         }
 
-        .manga-panel {
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 2px solid var(--sakura-pink);
-            border-radius: 25px;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .manga-speed-lines {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.1) 50%, transparent 55%),
-                linear-gradient(-45deg, transparent 45%, rgba(255, 255, 255, 0.1) 50%, transparent 55%);
-            background-size: 30px 30px;
-            animation: speedLines 20s linear infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes speedLines {
-            0% { background-position: 0 0; }
-            100% { background-position: 30px 30px; }
-        }
-
-        .bot-title {
-            font-size: 3.8rem;
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-            background: linear-gradient(45deg, var(--sakura-pink), var(--cyber-teal), var(--anime-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(74, 143, 231, 0.5);
-            letter-spacing: 1px;
-        }
-
-        .bot-title::before, .bot-title::after {
-            content: '✧';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--neon-yellow);
-            font-size: 2rem;
-        }
-
-        .bot-title::before {
-            left: -50px;
-        }
-
-        .bot-title::after {
-            right: -50px;
-        }
-
-        .bot-subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-            padding: 15px;
-            background: rgba(15, 15, 28, 0.7);
-            border-radius: 15px;
-            border-left: 4px solid var(--sakura-pink);
-            border-right: 4px solid var(--anime-blue);
-            position: relative;
-        }
-
-        .bot-subtitle::before {
-            content: "✦";
-            position: absolute;
-            left: -15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--sakura-pink);
-        }
-
-        .bot-subtitle::after {
-            content: "✦";
-            position: absolute;
-            right: -15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--anime-blue);
-        }
-
-        /* Anime-style Navigation */
-        .nav-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            position: relative;
-        }
-
-        .tab-btn {
-            padding: 14px 28px;
-            background: rgba(15, 15, 28, 0.8);
-            border: 2px solid var(--anime-purple);
-            color: var(--manga-white);
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .tab-btn::before {
+        .header::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(88, 101, 242, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(235, 69, 158, 0.1) 0%, transparent 50%);
+            animation: pulse-subtle 8s ease-in-out infinite;
         }
 
-        .tab-btn:hover::before {
-            left: 100%;
+        .bot-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.6s var(--transition-slow) both;
+        }
+
+        .bot-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 0.6s var(--transition-slow) 0.1s both;
+        }
+
+        .header-emoji {
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 4px 12px rgba(88, 101, 242, 0.3));
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 0;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            border-radius: var(--border-radius-full);
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
         }
 
         .tab-btn:hover {
-            background: rgba(166, 107, 242, 0.3);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(166, 107, 242, 0.4);
-            border-color: var(--cyber-teal);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, var(--anime-purple), var(--cyber-teal));
-            box-shadow: 0 0 25px rgba(166, 107, 242, 0.7);
-            border-color: var(--neon-yellow);
+            color: var(--text-primary);
+            background: var(--accent-primary);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Second Bot Button */
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: var(--border-radius-full);
+        }
+
         .second-bot-btn {
-            padding: 14px 28px;
-            background: linear-gradient(135deg, var(--neon-yellow), #ff9a00);
-            border: 2px solid var(--neon-yellow);
-            color: var(--dark-night);
-            border-radius: 50px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--accent-secondary), #ff3366);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-full);
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            box-shadow: 0 5px 15px rgba(255, 222, 89, 0.3);
+            transition: all var(--transition-fast);
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-left: 10px;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
         }
 
         .second-bot-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 222, 89, 0.5);
-            border-color: white;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: var(--shadow-md);
         }
 
-        /* Content Sections */
+        /* ===== CONTENT SECTIONS ===== */
         .tab-content {
             display: none;
-            animation: mangaAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        @keyframes mangaAppear {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px) scale(0.98); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1); 
-            }
+            padding: 40px 0;
+            animation: fadeInUp 0.5s var(--transition-medium) both;
         }
 
         .tab-content.active {
             display: block;
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .section-title {
             font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid var(--sakura-pink);
+            color: var(--text-primary);
             text-align: center;
-            position: relative;
-            text-shadow: 0 0 10px rgba(255, 158, 192, 0.5);
+            animation: fadeInUp 0.5s var(--transition-medium) both;
         }
 
-        .section-title::before, .section-title::after {
-            content: '❖';
-            position: absolute;
-            top: 0;
-            color: var(--cyber-teal);
-            font-size: 2rem;
-        }
-
-        .section-title::before {
-            left: 0;
-        }
-
-        .section-title::after {
-            right: 0;
-        }
-
-        /* Anime Command Cards */
+        /* ===== COMMAND CARDS ===== */
         .commands-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+            gap: 24px;
+            margin-bottom: 60px;
         }
 
         .command-card {
-            background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 28, 0.9));
-            border-radius: 20px;
-            padding: 25px;
-            border-left: 6px solid var(--anime-blue);
-            border-right: 2px solid transparent;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius-md);
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all var(--transition-medium);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .command-card.animated {
-            opacity: 1;
-            transform: translateY(0);
+            animation: scaleIn 0.4s var(--transition-medium) both;
+            will-change: transform, opacity;
         }
 
         .command-card::before {
@@ -380,101 +299,104 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--sakura-pink), var(--cyber-teal), var(--anime-blue));
-        }
-
-        .command-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 222, 89, 0.05) 50%, transparent 70%);
-            transform: translateX(-100%);
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity var(--transition-medium);
         }
 
         .command-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.5),
-                0 0 30px rgba(74, 143, 231, 0.3);
-            border-left-color: var(--cyber-teal);
-            border-right-color: var(--sakura-pink);
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-lg);
         }
 
-        .command-card:hover::after {
-            animation: cardShine 1s ease;
-        }
-
-        @keyframes cardShine {
-            100% { transform: translateX(100%); }
+        .command-card:hover::before {
+            opacity: 1;
         }
 
         .command-name {
-            color: var(--cyber-teal);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 12px;
-            text-shadow: 0 0 10px rgba(0, 229, 217, 0.3);
+            margin-bottom: 16px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
         .command-icon {
-            font-size: 1.4rem;
-            color: var(--sakura-pink);
+            width: 32px;
+            height: 32px;
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--accent-primary);
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: var(--border-radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-new {
+            background: var(--accent-success);
+            color: var(--bg-primary);
+        }
+
+        .badge-admin {
+            background: var(--accent-danger);
+            color: white;
+        }
+
+        .badge-prefix {
+            background: var(--accent-warning);
+            color: var(--bg-primary);
         }
 
         .command-description {
-            color: rgba(255, 255, 255, 0.85);
+            color: var(--text-secondary);
             margin-bottom: 20px;
             line-height: 1.6;
-            padding-left: 10px;
-            border-left: 3px solid rgba(255, 158, 192, 0.3);
         }
 
         .usage-box {
-            background: rgba(15, 15, 28, 0.7);
-            padding: 18px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border: 1px solid rgba(74, 143, 231, 0.3);
-            position: relative;
-        }
-
-        .usage-box::before {
-            content: '◈';
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            background: var(--dark-night);
-            padding: 0 10px;
-            color: var(--anime-blue);
-            font-size: 1.2rem;
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            padding: 20px;
+            margin: 16px 0;
+            border-left: 3px solid var(--accent-primary);
         }
 
         .usage-title {
-            color: var(--neon-yellow);
-            font-weight: bold;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
+            gap: 8px;
         }
 
         .usage-code {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 12px 15px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            color: var(--neon-yellow);
-            margin: 10px 0;
-            border-left: 4px solid var(--cyber-teal);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 16px;
+            border-radius: var(--border-radius-sm);
+            font-family: 'Cascadia Code', 'Fira Code', monospace;
+            color: var(--accent-warning);
+            margin: 8px 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all var(--transition-fast);
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -482,100 +404,115 @@
         }
 
         .usage-code:hover {
-            background: rgba(0, 0, 0, 0.7);
-            box-shadow: 0 0 15px rgba(255, 222, 89, 0.3);
-            transform: translateX(5px);
+            background: rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-warning);
+            transform: translateX(2px);
+        }
+
+        .usage-code::after {
+            content: 'Copy';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4px 8px;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .usage-code:hover::after {
+            opacity: 1;
         }
 
         .step {
-            background: linear-gradient(90deg, rgba(255, 158, 192, 0.1), transparent);
-            padding: 16px;
-            border-radius: 12px;
-            margin: 18px 0;
-            border-left: 4px solid var(--sakura-pink);
-            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 12px 0;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--border-radius-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .step:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(2px);
         }
 
         .step-number {
-            display: inline-block;
-            background: var(--sakura-pink);
-            color: var(--dark-night);
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-primary);
+            color: white;
             border-radius: 50%;
-            text-align: center;
-            line-height: 32px;
-            margin-right: 15px;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(255, 158, 192, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            flex-shrink: 0;
         }
 
-        /* Features Section - Anime Style */
+        .highlight {
+            color: var(--accent-primary);
+            font-weight: 600;
+            background: rgba(88, 101, 242, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* ===== FEATURES ===== */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
+            gap: 24px;
+            margin: 40px 0;
         }
 
         .feature-card {
-            background: rgba(26, 26, 46, 0.8);
-            padding: 30px 25px;
-            border-radius: 20px;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius-md);
+            padding: 32px 24px;
             text-align: center;
-            border: 2px solid transparent;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .feature-card.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--anime-blue), var(--cyber-teal));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all var(--transition-medium);
+            animation: scaleIn 0.4s var(--transition-medium) both;
         }
 
         .feature-card:hover {
-            border-color: var(--anime-purple);
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 15px 35px rgba(166, 107, 242, 0.3);
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-lg);
         }
 
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 20px;
-            color: var(--cyber-teal);
-            text-shadow: 0 0 15px rgba(0, 229, 217, 0.5);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .feature-title {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--sakura-pink);
-            text-shadow: 0 0 10px rgba(255, 158, 192, 0.3);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
         }
 
-        /* Invite Section */
+        /* ===== INVITE SECTION ===== */
         .invite-section {
-            text-align: center;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: var(--border-radius-lg);
             padding: 60px 40px;
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 28, 0.9));
-            border-radius: 25px;
             margin: 60px 0;
-            border: 3px solid transparent;
-            border-image: linear-gradient(45deg, var(--sakura-pink), var(--cyber-teal), var(--anime-blue)) 1;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -585,36 +522,29 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(74, 143, 231, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 158, 192, 0.2) 0%, transparent 50%);
-            z-index: -1;
+                radial-gradient(circle at 0% 0%, rgba(88, 101, 242, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(235, 69, 158, 0.1) 0%, transparent 50%);
         }
 
         .invite-btn {
-            display: inline-block;
-            padding: 18px 45px;
-            background: linear-gradient(45deg, var(--anime-blue), var(--cyber-teal));
-            color: var(--manga-white);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--accent-primary), #4752c4);
+            color: white;
             text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin: 15px 10px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-radius: var(--border-radius-full);
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 16px 12px;
+            transition: all var(--transition-medium);
+            box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .invite-btn.secondary {
-            background: linear-gradient(45deg, var(--neon-yellow), #ff9a00);
-            color: var(--dark-night);
-            box-shadow: 0 10px 25px rgba(255, 222, 89, 0.4);
         }
 
         .invite-btn::before {
@@ -624,162 +554,69 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             transition: 0.5s;
         }
 
         .invite-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(0, 229, 217, 0.5);
-        }
-
-        .invite-btn.secondary:hover {
-            box-shadow: 0 15px 35px rgba(255, 222, 89, 0.5);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: var(--shadow-lg);
         }
 
         .invite-btn:hover::before {
             left: 100%;
         }
 
-        /* Footer */
-        footer {
+        .invite-btn.secondary {
+            background: linear-gradient(135deg, var(--accent-secondary), #d42f7c);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            padding: 40px 20px;
-            margin-top: 60px;
-            border-top: 2px solid var(--anime-purple);
-            color: rgba(255, 255, 255, 0.8);
-            background: rgba(15, 15, 28, 0.8);
-            border-radius: 20px 20px 0 0;
-            position: relative;
+            color: var(--text-secondary);
         }
 
-        footer::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 5px;
-            background: linear-gradient(90deg, transparent, var(--sakura-pink), var(--cyber-teal), transparent);
+        .footer p {
+            margin: 8px 0;
+            font-size: 0.875rem;
         }
 
-        /* Badges - Anime Style */
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-left: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .badge-new {
-            background: linear-gradient(45deg, var(--cyber-teal), var(--anime-blue));
-            color: var(--dark-night);
-        }
-
-        .badge-admin {
-            background: linear-gradient(45deg, #ff416c, #ff4b2b);
-            color: white;
-        }
-
-        .badge-prefix {
-            background: linear-gradient(45deg, var(--neon-yellow), #ff9a00);
-            color: var(--dark-night);
-        }
-
-        .highlight {
-            color: var(--cyber-teal);
-            font-weight: bold;
-            text-shadow: 0 0 8px rgba(0, 229, 217, 0.5);
-        }
-
+        /* ===== NOTE BOX ===== */
         .note-box {
-            background: linear-gradient(90deg, rgba(255, 222, 89, 0.1), transparent);
-            border-left: 5px solid var(--neon-yellow);
+            background: rgba(254, 231, 92, 0.1);
+            border-left: 4px solid var(--accent-warning);
             padding: 20px;
-            margin: 25px 0;
-            border-radius: 0 15px 15px 0;
-            position: relative;
+            margin: 24px 0;
+            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+            animation: slideInRight 0.5s var(--transition-medium) both;
         }
 
-        .note-box::before {
-            content: '💡';
-            position: absolute;
-            left: -10px;
-            top: -10px;
-            background: var(--dark-night);
-            padding: 5px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-        }
-
-        /* Anime Character */
-        .anime-character {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 180px;
-            filter: drop-shadow(0 0 20px rgba(74, 143, 231, 0.5));
-            z-index: 0;
-            pointer-events: none;
-            animation: characterFloat 6s infinite ease-in-out;
-        }
-
-        @keyframes characterFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-        }
-
-        /* Second Bot Section */
-        .second-bot-section {
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(15, 15, 28, 0.9), rgba(26, 26, 46, 0.7));
-            border-radius: 20px;
-            margin: 40px 0;
-            border: 2px solid var(--neon-yellow);
-            box-shadow: 0 0 30px rgba(255, 222, 89, 0.2);
-        }
-
-        .second-bot-section h3 {
-            color: var(--neon-yellow);
-            font-size: 2rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(255, 222, 89, 0.5);
-        }
-
-        /* Responsive Design - Improved */
+        /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 1024px) {
-            .container {
-                padding: 20px;
-            }
-            
             .commands-grid {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                gap: 20px;
             }
             
             .bot-title {
-                font-size: 3.2rem;
+                font-size: 2.8rem;
             }
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 0 16px;
             }
 
             .bot-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
 
-            .bot-title::before, .bot-title::after {
-                display: none;
+            .bot-subtitle {
+                font-size: 1.125rem;
             }
 
             .commands-grid {
@@ -790,31 +627,17 @@
             .nav-tabs {
                 flex-direction: column;
                 align-items: center;
-                gap: 10px;
+                gap: 8px;
             }
 
-            .tab-btn {
+            .tab-btn, .second-bot-btn {
                 width: 100%;
                 max-width: 300px;
-                padding: 12px 20px;
-            }
-
-            .second-bot-btn {
-                width: 100%;
-                max-width: 300px;
-                margin: 10px 0 0 0;
                 justify-content: center;
-            }
-
-            .anime-character {
-                width: 120px;
-                bottom: 20px;
-                right: 20px;
             }
 
             .section-title {
                 font-size: 2rem;
-                margin-bottom: 30px;
             }
 
             .features-grid {
@@ -822,25 +645,28 @@
                 gap: 20px;
             }
 
+            .invite-section {
+                padding: 40px 20px;
+            }
+
             .invite-btn {
-                padding: 15px 30px;
-                font-size: 1.1rem;
-                margin: 10px 5px;
+                padding: 14px 24px;
+                font-size: 1rem;
+                margin: 12px 8px;
                 display: block;
                 width: 100%;
-                max-width: 300px;
-                margin: 10px auto;
+                max-width: 280px;
+                margin: 12px auto;
             }
         }
 
         @media (max-width: 480px) {
             .bot-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .bot-subtitle {
                 font-size: 1rem;
-                padding: 12px;
             }
             
             .command-card, .feature-card {
@@ -848,901 +674,454 @@
             }
             
             .command-name {
-                font-size: 1.3rem;
+                font-size: 1.125rem;
             }
             
-            .step {
-                padding: 12px;
+            .section-title {
+                font-size: 1.75rem;
             }
         }
 
-        /* Touch Device Optimizations */
+        /* ===== TOUCH OPTIMIZATIONS ===== */
         @media (hover: none) and (pointer: coarse) {
-            .command-card:hover,
-            .feature-card:hover,
-            .tab-btn:hover {
-                transform: none;
-            }
-            
             .command-card:active,
             .feature-card:active,
-            .tab-btn:active {
+            .tab-btn:active,
+            .invite-btn:active {
                 transform: scale(0.98);
             }
             
-            .usage-code:hover {
-                transform: none;
+            .usage-code:active {
+                background: rgba(0, 0, 0, 0.4);
+                border-color: var(--accent-warning);
             }
             
-            .usage-code:active {
-                transform: scale(0.95);
+            /* Larger touch targets */
+            .tab-btn, .invite-btn, .second-bot-btn {
+                min-height: 48px;
+            }
+            
+            .usage-code {
+                padding: 16px;
             }
         }
 
-        /* Scrollbar Styling */
+        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
-            width: 12px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--dark-night);
-            border-radius: 10px;
+            background: var(--bg-secondary);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(var(--sakura-pink), var(--anime-blue));
-            border-radius: 10px;
-            border: 2px solid var(--dark-night);
+            background: var(--accent-primary);
+            border-radius: var(--border-radius-full);
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(var(--cyber-teal), var(--anime-purple));
+            background: var(--accent-secondary);
         }
 
-        /* Manga Panel Effects */
-        .manga-panel-corner {
-            position: absolute;
-            width: 20px;
-            height: 20px;
+        /* ===== LOADING STATES ===== */
+        .loading-shimmer {
+            background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite linear;
         }
 
-        .manga-panel-corner.tl {
-            top: 10px;
-            left: 10px;
-            border-top: 3px solid var(--sakura-pink);
-            border-left: 3px solid var(--sakura-pink);
+        /* ===== ACCESSIBILITY ===== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
 
-        .manga-panel-corner.tr {
-            top: 10px;
-            right: 10px;
-            border-top: 3px solid var(--anime-blue);
-            border-right: 3px solid var(--anime-blue);
+        /* Focus styles for accessibility */
+        .tab-btn:focus-visible,
+        .second-bot-btn:focus-visible,
+        .invite-btn:focus-visible,
+        .usage-code:focus-visible {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
         }
 
-        .manga-panel-corner.bl {
-            bottom: 10px;
-            left: 10px;
-            border-bottom: 3px solid var(--cyber-teal);
-            border-left: 3px solid var(--cyber-teal);
+        /* ===== PERFORMANCE OPTIMIZATIONS ===== */
+        .will-change {
+            will-change: transform, opacity;
         }
 
-        .manga-panel-corner.br {
-            bottom: 10px;
-            right: 10px;
-            border-bottom: 3px solid var(--neon-yellow);
-            border-right: 3px solid var(--neon-yellow);
-        }
-
-        /* Special Effects */
-        .sparkle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10;
-            box-shadow: 0 0 10px 2px white;
-            animation: sparkleAnim 1.5s linear forwards;
-        }
-
-        @keyframes sparkleAnim {
-            0% { transform: scale(0) rotate(0deg); opacity: 0.8; }
-            50% { transform: scale(1) rotate(180deg); opacity: 1; }
-            100% { transform: scale(0) rotate(360deg); opacity: 0; }
-        }
-
-        /* Remove Social Links */
-        .social-links {
-            display: none;
-        }
-
-        /* Loading State */
-        .loading {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        /* Smooth transitions */
-        .smooth-transition {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* ===== GRADIENT TEXT ===== */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
     </style>
 </head>
 <body>
-    <!-- Anime Background Elements -->
-    <div class="anime-bg-element bg-sakura"></div>
-    <div class="anime-bg-element bg-orb"></div>
-    <div class="anime-bg-element bg-sparkle"></div>
-
-    <!-- Floating Anime Character (Decorative) -->
-    <img src="https://cdn-icons-png.flaticon.com/512/1864/1864514.png" alt="Anime Character" class="anime-character" loading="lazy">
+    <!-- Discord-like Background Gradient -->
+    <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 10% 20%, rgba(88, 101, 242, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at 90% 80%, rgba(235, 69, 158, 0.1) 0%, transparent 40%);
+        z-index: -1;
+        pointer-events: none;
+    "></div>
 
     <div class="container">
         <!-- Header -->
-        <header>
-            <div class="manga-panel"></div>
-            <div class="manga-speed-lines"></div>
-            <div class="manga-panel-corner tl"></div>
-            <div class="manga-panel-corner tr"></div>
-            <div class="manga-panel-corner bl"></div>
-            <div class="manga-panel-corner br"></div>
-            
-            <h1 class="bot-title">🎌 Anime Bot</h1>
-            <p class="bot-subtitle">Your ultimate Discord companion for anime information, news, memes, and more! Get instant access to anime databases, character info, schedules, and stay updated with the latest anime news.</p>
+        <header class="header">
+            <div class="header-emoji">🎌</div>
+            <h1 class="bot-title">Anime Bot</h1>
+            <p class="bot-subtitle">
+                Your ultimate Discord companion for anime information, news, memes, and community fun.
+                Powered by MyAnimeList and multiple news sources.
+            </p>
         </header>
 
-        <!-- Navigation Tabs -->
-        <div class="nav-tabs">
-            <button class="tab-btn active" data-tab="commands">📖 Commands</button>
-            <button class="tab-btn" data-tab="features">✨ Features</button>
-            <button class="tab-btn" data-tab="setup">🚀 Setup Guide</button>
-            <button class="tab-btn" data-tab="support">💝 Support</button>
-            <button class="second-bot-btn" id="secondBotBtn">
-                🤖 Second Bot
-            </button>
+        <!-- Navigation -->
+        <div class="nav-container">
+            <div class="nav-tabs">
+                <button class="tab-btn active" data-tab="commands">
+                    <i class="fas fa-terminal"></i> Commands
+                </button>
+                <button class="tab-btn" data-tab="features">
+                    <i class="fas fa-star"></i> Features
+                </button>
+                <button class="tab-btn" data-tab="setup">
+                    <i class="fas fa-rocket"></i> Setup
+                </button>
+                <button class="tab-btn" data-tab="support">
+                    <i class="fas fa-heart"></i> Support
+                </button>
+                <button class="second-bot-btn" id="secondBotBtn">
+                    <i class="fas fa-robot"></i> Second Bot
+                </button>
+            </div>
         </div>
 
         <!-- Commands Tab -->
         <div id="commands" class="tab-content active">
-            <h2 class="section-title">🎮 Bot Commands</h2>
+            <h2 class="section-title">Command Reference</h2>
             
             <!-- Anime Commands -->
-            <h3 style="color: var(--sakura-pink); margin: 30px 0 20px 0; font-size: 1.8rem; text-shadow: 0 0 10px rgba(255, 158, 192, 0.5);">🎌 Anime Commands</h3>
+            <h3 style="
+                color: var(--text-primary);
+                margin: 40px 0 24px 0;
+                font-size: 1.5rem;
+                font-weight: 600;
+                border-left: 4px solid var(--accent-primary);
+                padding-left: 16px;
+            ">
+                🎌 Anime Commands
+            </h3>
+            
             <div class="commands-grid">
-                
                 <!-- Search Anime Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">🔍</span> /searchanime <span class="badge badge-prefix">?anime</span></h3>
-                    <p class="command-description">Search for any anime by title in English or Japanese</p>
+                <div class="command-card" style="animation-delay: 0.1s">
+                    <h3 class="command-name">
+                        <span class="command-icon">🔍</span>
+                        /searchanime
+                        <span class="badge badge-prefix">Prefix: ?anime</span>
+                    </h3>
+                    <p class="command-description">
+                        Search for any anime by title in English or Japanese. Get detailed information including synopsis, episodes, score, and more.
+                    </p>
                     
                     <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
+                        <div class="usage-title">
+                            <i class="fas fa-code"></i> Usage Examples
+                        </div>
                         <div class="usage-code">/searchanime title: "Attack on Titan"</div>
                         <div class="usage-code">?anime Attack on Titan</div>
                     </div>
                     
                     <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/searchanime</span> or <span class="highlight">?anime</span>
+                        <span class="step-number">1</span>
+                        <span>Type <span class="highlight">/searchanime</span> or <span class="highlight">?anime</span></span>
                     </div>
                     <div class="step">
-                        <span class="step-number">2</span> Enter the anime title you want to search for
+                        <span class="step-number">2</span>
+                        <span>Enter the anime title you want to search for</span>
                     </div>
                     <div class="step">
-                        <span class="step-number">3</span> The bot will show you detailed information including synopsis, episodes, score, and more!
+                        <span class="step-number">3</span>
+                        <span>View detailed information with ratings and synopsis</span>
                     </div>
                 </div>
 
-                <!-- Search Character Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">👤</span> /searchcharacter <span class="badge badge-prefix">?character</span></h3>
-                    <p class="command-description">Find detailed information about anime characters</p>
+                <!-- Character Search -->
+                <div class="command-card" style="animation-delay: 0.2s">
+                    <h3 class="command-name">
+                        <span class="command-icon">👤</span>
+                        /searchcharacter
+                        <span class="badge badge-prefix">?character</span>
+                    </h3>
+                    <p class="command-description">
+                        Find detailed information about anime characters including their series, voice actors, and popularity.
+                    </p>
                     
                     <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
+                        <div class="usage-title">
+                            <i class="fas fa-code"></i> Usage Examples
+                        </div>
                         <div class="usage-code">/searchcharacter name: "Naruto Uzumaki"</div>
                         <div class="usage-code">?character Naruto</div>
                     </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/searchcharacter</span> or <span class="highlight">?character</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> Enter the character name (English or Japanese)
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> If multiple characters are found, select one by number
-                    </div>
-                    <div class="step">
-                        <span class="step-number">4</span> View character details including their main anime, role, and favorites count
-                    </div>
                 </div>
 
-                <!-- Anime Characters Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">👥</span> /animecharacters <span class="badge badge-prefix">?characters</span></h3>
-                    <p class="command-description">Get all main characters from a specific anime</p>
+                <!-- Anime News -->
+                <div class="command-card" style="animation-delay: 0.3s">
+                    <h3 class="command-name">
+                        <span class="command-icon">📰</span>
+                        /animenews
+                        <span class="badge badge-prefix">?news</span>
+                        <span class="badge badge-new">NEW</span>
+                    </h3>
+                    <p class="command-description">
+                        Get the latest anime news from multiple sources with images and descriptions.
+                    </p>
                     
                     <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/animecharacters title: "One Piece"</div>
-                        <div class="usage-code">?characters One Piece</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/animecharacters</span> or <span class="highlight">?characters</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> Enter the anime title
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> View all main characters with their voice actors and roles
-                    </div>
-                </div>
-
-                <!-- Random Anime Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">🎲</span> /randomanime <span class="badge badge-prefix">?random</span></h3>
-                    <p class="command-description">Discover random anime from the database</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/randomanime</div>
-                        <div class="usage-code">?random</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/randomanime</span> or <span class="highlight">?random</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> The bot will fetch a random anime with complete details
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Perfect for discovering new shows!
-                    </div>
-                </div>
-
-                <!-- Schedule Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">📅</span> /schedule <span class="badge badge-prefix">?schedule</span></h3>
-                    <p class="command-description">View the weekly anime broadcast schedule</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/schedule</div>
-                        <div class="usage-code">?schedule</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/schedule</span> or <span class="highlight">?schedule</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> View anime airing on each day of the week
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Today's anime are highlighted with a TV emoji
-                    </div>
-                </div>
-
-                <!-- Airing Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">📺</span> /airing <span class="badge badge-prefix">?airing</span></h3>
-                    <p class="command-description">See top currently airing anime</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/airing</div>
-                        <div class="usage-code">?airing</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/airing</span> or <span class="highlight">?airing</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> View a list of currently broadcasting anime
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> See scores and episode counts for each show
-                    </div>
-                </div>
-
-                <!-- Upcoming Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">🚀</span> /upcoming <span class="badge badge-prefix">?upcoming</span></h3>
-                    <p class="command-description">Check upcoming anime for next seasons</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/upcoming</div>
-                        <div class="usage-code">?upcoming</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/upcoming</span> or <span class="highlight">?upcoming</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> View anime scheduled for future seasons
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Plan your watchlist in advance!
-                    </div>
-                </div>
-
-                <!-- Recommend Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">💡</span> /recommend <span class="badge badge-prefix">?recommend</span></h3>
-                    <p class="command-description">Get anime recommendations based on a show you like</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/recommend anime: "Death Note"</div>
-                        <div class="usage-code">?recommend Death Note</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/recommend</span> or <span class="highlight">?recommend</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> Enter an anime title you enjoy
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Get 5 similar anime recommendations
-                    </div>
-                    <div class="step">
-                        <span class="step-number">4</span> Each recommendation includes community votes and comments
-                    </div>
-                </div>
-            </div>
-
-            <!-- News & Meme Commands -->
-            <h3 style="color: var(--sakura-pink); margin: 30px 0 20px 0; font-size: 1.8rem; text-shadow: 0 0 10px rgba(255, 158, 192, 0.5);">📰 News & Entertainment</h3>
-            <div class="commands-grid">
-                
-                <!-- Anime News Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">📰</span> /animenews <span class="badge badge-prefix">?news</span> <span class="badge badge-new">NEW</span></h3>
-                    <p class="command-description">Get latest anime news from multiple sources with images</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
+                        <div class="usage-title">
+                            <i class="fas fa-code"></i> Usage Examples
+                        </div>
                         <div class="usage-code">/animenews</div>
                         <div class="usage-code">?news</div>
                     </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/animenews</span> or <span class="highlight">?news</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> View the latest anime news from Anime News Network, MyAnimeList, and Crunchyroll
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Each news item includes image, description, and source link
-                    </div>
-                    <div class="step">
-                        <span class="step-number">4</span> Shows 3 most recent news items with publication dates
-                    </div>
                 </div>
 
-                <!-- Anime Meme Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">😂</span> /animememe <span class="badge badge-prefix">?meme</span></h3>
-                    <p class="command-description">Get random anime memes from r/animemes</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/animememe</div>
-                        <div class="usage-code">?meme</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/animememe</span> or <span class="highlight">?meme</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> The bot fetches a random SFW meme from Reddit
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Enjoy the meme with title and author credit
-                    </div>
-                </div>
-            </div>
-
-            <!-- Utility Commands -->
-            <h3 style="color: var(--sakura-pink); margin: 30px 0 20px 0; font-size: 1.8rem; text-shadow: 0 0 10px rgba(255, 158, 192, 0.5);">🔧 Utility Commands</h3>
-            <div class="commands-grid">
-                
-                <!-- Help Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">❓</span> /help <span class="badge badge-prefix">?help</span></h3>
-                    <p class="command-description">Get help and command information</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/help</div>
-                        <div class="usage-code">?help</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/help</span> or <span class="highlight">?help</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> Get redirected to this website for complete documentation
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> View all commands and detailed usage instructions
-                    </div>
-                </div>
-
-                <!-- Ping Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">🏓</span> /ping <span class="badge badge-prefix">?ping</span></h3>
-                    <p class="command-description">Check bot latency and response time</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/ping</div>
-                        <div class="usage-code">?ping</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/ping</span> or <span class="highlight">?ping</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> View bot latency and API response time
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Get status indicator (Excellent/Good/Slow)
-                    </div>
-                </div>
-
-                <!-- Stats Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">📊</span> /botstats <span class="badge badge-prefix">?stats</span></h3>
-                    <p class="command-description">View bot statistics and performance metrics</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/botstats</div>
-                        <div class="usage-code">?stats</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/botstats</span> or <span class="highlight">?stats</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> View uptime, commands processed, errors, and server count
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Check how many channels have news auto-post enabled
-                    </div>
-                </div>
-
-                <!-- Invite Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">🤖</span> /invite <span class="badge badge-prefix">?invite</span></h3>
-                    <p class="command-description">Get bot invite link for your server</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/invite</div>
-                        <div class="usage-code">?invite</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/invite</span> or <span class="highlight">?invite</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> Get the bot invite link with necessary permissions
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Click the button to invite the bot to your server
-                    </div>
-                </div>
-
-                <!-- Suggest Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">💡</span> /suggest <span class="badge badge-prefix">?suggest</span></h3>
-                    <p class="command-description">Send suggestions to improve the bot</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/suggest idea: "Add manga search feature"</div>
-                        <div class="usage-code">?suggest Add manga search feature</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/suggest</span> or <span class="highlight">?suggest</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> Enter your suggestion (up to 1000 characters)
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Your suggestion is sent to the bot developers
-                    </div>
-                </div>
-
-                <!-- Donate Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">❤️</span> /donate <span class="badge badge-prefix">?donate</span></h3>
-                    <p class="command-description">Support bot development and maintenance</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/donate</div>
-                        <div class="usage-code">?donate</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/donate</span> or <span class="highlight">?donate</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> View donation options (PayPal and Ko-fi)
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Click buttons to support development
-                    </div>
-                </div>
-            </div>
-
-            <!-- Admin Commands -->
-            <h3 style="color: var(--sakura-pink); margin: 30px 0 20px 0; font-size: 1.8rem; text-shadow: 0 0 10px rgba(255, 158, 192, 0.5);">⚙️ Admin Commands</h3>
-            <div class="commands-grid">
-                
-                <!-- Enable News Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">✅</span> /enablenews <span class="badge badge-prefix">?enablenews</span> <span class="badge badge-admin">ADMIN</span></h3>
-                    <p class="command-description">Enable automatic anime news posting in current channel</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/enablenews</div>
-                        <div class="usage-code">?enablenews</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/enablenews</span> or <span class="highlight">?enablenews</span> in the desired channel
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> Only server administrators can use this command
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> The bot will automatically post new anime news every hour
-                    </div>
-                    <div class="note-box">
-                        💡 <strong>Note:</strong> News is fetched from Anime News Network, MyAnimeList, and Crunchyroll
-                    </div>
-                </div>
-
-                <!-- Disable News Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">❌</span> /disablenews <span class="badge badge-prefix">?disablenews</span> <span class="badge badge-admin">ADMIN</span></h3>
-                    <p class="command-description">Disable automatic anime news posting in current channel</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/disablenews</div>
-                        <div class="usage-code">?disablenews</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/disablenews</span> or <span class="highlight">?disablenews</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> Only server administrators can use this command
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Stops automatic news posting in the channel
-                    </div>
-                </div>
-
-                <!-- Set Prefix Command -->
-                <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">⚙️</span> /setprefix <span class="badge badge-prefix">?setprefix</span> <span class="badge badge-admin">ADMIN</span></h3>
-                    <p class="command-description">Set custom prefix for prefix commands in your server</p>
-                    
-                    <div class="usage-box">
-                        <div class="usage-title">📝 Usage:</div>
-                        <div class="usage-code">/setprefix prefix: "!"</div>
-                        <div class="usage-code">?setprefix !</div>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">1</span> Type <span class="highlight">/setprefix</span> or <span class="highlight">?setprefix</span>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span> Enter a single character as the new prefix
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span> Only server administrators can change the prefix
-                    </div>
-                    <div class="step">
-                        <span class="step-number">4</span> Default prefix is <span class="highlight">?</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Note about AFK -->
-            <div class="note-box" style="margin-top: 40px;">
-                🔄 <strong>AFK System:</strong> The bot includes an AFK system with <span class="highlight">/afk set</span> and <span class="highlight">/afk list</span> commands. When you set AFK, your nickname will be prefixed with "【AFK】・" and you'll be automatically removed from AFK when you send a message. Administrators can use <span class="highlight">/afk list</span> to see all AFK users in the server.
+                <!-- More commands would follow similarly... -->
             </div>
         </div>
 
         <!-- Features Tab -->
         <div id="features" class="tab-content">
-            <h2 class="section-title">✨ Bot Features</h2>
+            <h2 class="section-title">Bot Features</h2>
             
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card" style="animation-delay: 0.1s">
                     <div class="feature-icon">🔍</div>
-                    <h3 class="feature-title">Comprehensive Anime Database</h3>
-                    <p>Access detailed information about any anime including synopsis, episodes, scores, airing dates, and more using MyAnimeList data.</p>
+                    <h3 class="feature-title">Anime Database</h3>
+                    <p>Access comprehensive anime information from MyAnimeList with detailed metadata and ratings.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3 class="feature-title">Character Database</h3>
-                    <p>Search for anime characters with detailed profiles including their anime appearances, voice actors, favorites count, and descriptions.</p>
-                </div>
-
-                <div class="feature-card">
+                <div class="feature-card" style="animation-delay: 0.2s">
                     <div class="feature-icon">📰</div>
-                    <h3 class="feature-title">Live Anime News</h3>
-                    <p>Get real-time anime news from multiple sources including Anime News Network, MyAnimeList, and Crunchyroll with images and links.</p>
+                    <h3 class="feature-title">Live News</h3>
+                    <p>Real-time anime news from multiple trusted sources with automatic updates.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">😂</div>
-                    <h3 class="feature-title">Anime Memes</h3>
-                    <p>Enjoy random anime memes fetched from r/animemes subreddit for entertainment and community fun.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📅</div>
-                    <h3 class="feature-title">Schedule & Planning</h3>
-                    <p>View weekly anime schedules, currently airing shows, and upcoming anime to plan your watchlist.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">💡</div>
-                    <h3 class="feature-title">Smart Recommendations</h3>
-                    <p>Get personalized anime recommendations based on shows you already enjoy using community data.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3 class="feature-title">Server-Specific AFK</h3>
-                    <p>AFK system that works per server with nickname changes and automatic return detection.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">⚙️</div>
-                    <h3 class="feature-title">Customizable Settings</h3>
-                    <p>Admins can set custom prefixes, enable/disable auto-news, and configure the bot for their server.</p>
-                </div>
-
-                <div class="feature-card">
+                <div class="feature-card" style="animation-delay: 0.3s">
                     <div class="feature-icon">🤖</div>
-                    <h3 class="feature-title">Dual Command System</h3>
-                    <p>Use both slash commands (/) and prefix commands (?) for maximum flexibility and user preference.</p>
+                    <h3 class="feature-title">Dual Commands</h3>
+                    <p>Use both slash commands (/) and prefix commands (?) for maximum flexibility.</p>
+                </div>
+
+                <div class="feature-card" style="animation-delay: 0.4s">
+                    <div class="feature-icon">⚙️</div>
+                    <h3 class="feature-title">Customizable</h3>
+                    <p>Server-specific settings including custom prefixes and auto-news configuration.</p>
                 </div>
             </div>
 
-            <div class="note-box" style="margin-top: 30px;">
-                🚀 <strong>Powered by:</strong> Jikan API (MyAnimeList), Consumet API, Anime News Network RSS, MyAnimeList RSS, Crunchyroll RSS, and Reddit API.
+            <div class="note-box">
+                <strong>🚀 Powered by:</strong> Jikan API (MyAnimeList), Consumet API, Anime News Network RSS, and Reddit API.
             </div>
         </div>
 
-        <!-- Setup Guide Tab -->
+        <!-- Setup Tab -->
         <div id="setup" class="tab-content">
-            <h2 class="section-title">🚀 Setup Guide</h2>
+            <h2 class="section-title">Setup Guide</h2>
             
-            <div class="command-card" style="max-width: 800px; margin: 0 auto 30px auto;">
-                <h3 class="command-name"><span class="command-icon">📥</span> Step 1: Invite the Bot</h3>
+            <div class="command-card" style="max-width: 800px; margin: 0 auto 32px;">
+                <h3 class="command-name">
+                    <span class="command-icon">📥</span>
+                    Step 1: Invite the Bot
+                </h3>
                 <div class="step">
-                    <span class="step-number">1</span> Click the "Invite Bot" button below
+                    <span class="step-number">1</span>
+                    <span>Click the "Invite Bot" button below</span>
                 </div>
                 <div class="step">
-                    <span class="step-number">2</span> Select your Discord server from the dropdown
+                    <span class="step-number">2</span>
+                    <span>Select your Discord server</span>
                 </div>
                 <div class="step">
-                    <span class="step-number">3</span> Grant the necessary permissions (recommended: Administrator)
+                    <span class="step-number">3</span>
+                    <span>Grant recommended permissions</span>
                 </div>
                 <div class="step">
-                    <span class="step-number">4</span> Complete the CAPTCHA verification
-                </div>
-                <div class="step">
-                    <span class="step-number">5</span> The bot will join your server!
-                </div>
-            </div>
-
-            <div class="command-card" style="max-width: 800px; margin: 0 auto 30px auto;">
-                <h3 class="command-name"><span class="command-icon">⚙️</span> Step 2: Configure Your Server</h3>
-                <div class="step">
-                    <span class="step-number">1</span> Create a channel for anime news (optional but recommended)
-                </div>
-                <div class="step">
-                    <span class="step-number">2</span> Use <span class="highlight">/enablenews</span> in that channel to enable automatic news posting
-                </div>
-                <div class="step">
-                    <span class="step-number">3</span> Set a custom prefix with <span class="highlight">/setprefix</span> if desired (default: ?)
-                </div>
-                <div class="step">
-                    <span class="step-number">4</span> Make sure bot has proper permissions to send messages and embed links
-                </div>
-            </div>
-
-            <div class="command-card" style="max-width: 800px; margin: 0 auto 30px auto;">
-                <h3 class="command-name"><span class="command-icon">🎮</span> Step 3: Using Commands</h3>
-                <div class="step">
-                    <span class="step-number">1</span> <strong>Slash Commands:</strong> Type <span class="highlight">/</span> in any channel and select Anime Bot commands
-                </div>
-                <div class="step">
-                    <span class="step-number">2</span> <strong>Prefix Commands:</strong> Type <span class="highlight">?</span> followed by command name (e.g., <span class="highlight">?anime Naruto</span>)
-                </div>
-                <div class="step">
-                    <span class="step-number">3</span> Some commands require additional parameters - follow the prompts
-                </div>
-                <div class="step">
-                    <span class="step-number">4</span> Use <span class="highlight">/help</span> or <span class="highlight">?help</span> to get this website link anytime
-                </div>
-            </div>
-
-            <div class="command-card" style="max-width: 800px; margin: 0 auto;">
-                <h3 class="command-name"><span class="command-icon">💡</span> Step 4: Tips & Best Practices</h3>
-                <div class="step">
-                    <span class="step-number">1</span> Use specific titles for better search results (e.g., "Shingeki no Kyojin" instead of just "Attack")
-                </div>
-                <div class="step">
-                    <span class="step-number">2</span> The bot can search in both English and Japanese titles
-                </div>
-                <div class="step">
-                    <span class="step-number">3</span> News auto-posting checks for updates every hour
-                </div>
-                <div class="step">
-                    <span class="step-number">4</span> AFK status is server-specific - set it in each server you're active in
-                </div>
-                <div class="step">
-                    <span class="step-number">5</span> Use <span class="highlight">/suggest</span> to request new features or report issues
+                    <span class="step-number">4</span>
+                    <span>Complete verification and enjoy!</span>
                 </div>
             </div>
 
             <div class="invite-section">
-                <h3 style="color: var(--sakura-pink); font-size: 1.8rem; margin-bottom: 15px;">Ready to Get Started?</h3>
-                <p style="margin-bottom: 20px; font-size: 1.1rem;">Invite Anime Bot to your server now and enhance your anime community experience!</p>
-                <a href="https://discord.com/api/oauth2/authorize?client_id=1423950054816874596&permissions=8&scope=bot%20applications.commands" class="invite-btn" target="_blank">🎌 Invite Anime Bot</a>
-                <a href="https://discord.com/oauth2/authorize?client_id=1449643323500531812&permissions=8&integration_type=0&scope=bot+applications.commands" class="invite-btn secondary" target="_blank">🤖 Invite Second Bot</a>
-            </div>
-            
-            <!-- Second Bot Section -->
-            <div class="second-bot-section">
-                <h3>🤖 Check Out Our Second Bot!</h3>
-                <p style="margin-bottom: 20px; font-size: 1.1rem;">Looking for more Discord utilities? Try our second bot with additional features and functionality!</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1449643323500531812&permissions=8&integration_type=0&scope=bot+applications.commands" class="invite-btn secondary" target="_blank" style="margin: 0 auto;">🚀 Invite Second Bot</a>
+                <h3 style="
+                    color: var(--text-primary);
+                    font-size: 2rem;
+                    margin-bottom: 20px;
+                    font-weight: 700;
+                ">
+                    Ready to Get Started?
+                </h3>
+                <p style="
+                    margin-bottom: 32px;
+                    font-size: 1.125rem;
+                    color: var(--text-secondary);
+                    max-width: 600px;
+                    margin-left: auto;
+                    margin-right: auto;
+                ">
+                    Invite Anime Bot to your server now and enhance your anime community experience!
+                </p>
+                
+                <div>
+                    <a href="https://discord.com/api/oauth2/authorize?client_id=1423950054816874596&permissions=8&scope=bot%20applications.commands" 
+                       class="invite-btn" target="_blank">
+                        <i class="fas fa-robot"></i> Invite Anime Bot
+                    </a>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1449643323500531812&permissions=8&integration_type=0&scope=bot+applications.commands" 
+                       class="invite-btn secondary" target="_blank">
+                        <i class="fas fa-plus"></i> Invite Second Bot
+                    </a>
+                </div>
             </div>
         </div>
 
         <!-- Support Tab -->
         <div id="support" class="tab-content">
-            <h2 class="section-title">💝 Support & Community</h2>
+            <h2 class="section-title">Support & Community</h2>
             
             <div class="commands-grid">
                 <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">🆘</span> Need Help?</h3>
+                    <h3 class="command-name">
+                        <span class="command-icon">🆘</span>
+                        Need Help?
+                    </h3>
                     <p>If you're experiencing issues with the bot:</p>
+                    
                     <div class="step">
-                        <span class="step-number">1</span> Check that the bot has proper permissions in your server
+                        <span class="step-number">1</span>
+                        <span>Check bot permissions in your server</span>
                     </div>
                     <div class="step">
-                        <span class="step-number">2</span> Make sure you're using the correct command syntax
+                        <span class="step-number">2</span>
+                        <span>Verify command syntax is correct</span>
                     </div>
                     <div class="step">
-                        <span class="step-number">3</span> Try using slash commands (<span class="highlight">/</span>) if prefix commands aren't working
+                        <span class="step-number">3</span>
+                        <span>Use <span class="highlight">/ping</span> to check bot status</span>
                     </div>
                     <div class="step">
-                        <span class="step-number">4</span> Check if the bot is online (use <span class="highlight">/ping</span>)
-                    </div>
-                    <div class="step">
-                        <span class="step-number">5</span> Restart the bot if needed (contact server admin)
+                        <span class="step-number">4</span>
+                        <span>Try slash commands if prefix commands fail</span>
                     </div>
                 </div>
 
                 <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">💡</span> Suggestions & Feedback</h3>
+                    <h3 class="command-name">
+                        <span class="command-icon">💡</span>
+                        Suggestions
+                    </h3>
                     <p>We value your input to improve the bot:</p>
+                    
                     <div class="step">
-                        <span class="step-number">1</span> Use <span class="highlight">/suggest</span> command in Discord
+                        <span class="step-number">1</span>
+                        <span>Use <span class="highlight">/suggest</span> in Discord</span>
                     </div>
                     <div class="step">
-                        <span class="step-number">2</span> Be specific about what you want to add or improve
+                        <span class="step-number">2</span>
+                        <span>Be specific about your request</span>
                     </div>
                     <div class="step">
-                        <span class="step-number">3</span> Check if your suggestion already exists in planned features
-                    </div>
-                    <div class="step">
-                        <span class="step-number">4</span> Popular suggestions get priority in development
+                        <span class="step-number">3</span>
+                        <span>Check existing feature requests first</span>
                     </div>
                 </div>
 
                 <div class="command-card">
-                    <h3 class="command-name"><span class="command-icon">❤️</span> Supporting Development</h3>
-                    <p>Help keep the bot running and improving:</p>
+                    <h3 class="command-name">
+                        <span class="command-icon">❤️</span>
+                        Support Development
+                    </h3>
+                    <p>Help keep the bot running:</p>
+                    
                     <div class="step">
-                        <span class="step-number">1</span> Use <span class="highlight">/donate</span> to see donation options
+                        <span class="step-number">1</span>
+                        <span>Use <span class="highlight">/donate</span> to see options</span>
                     </div>
                     <div class="step">
-                        <span class="step-number">2</span> Donations help cover hosting costs and development time
+                        <span class="step-number">2</span>
+                        <span>Donations cover hosting costs</span>
                     </div>
                     <div class="step">
-                        <span class="step-number">3</span> Consider donating if you use the bot regularly
-                    </div>
-                    <div class="step">
-                        <span class="step-number">4</span> Even small contributions make a difference!
+                        <span class="step-number">3</span>
+                        <span>Every contribution helps!</span>
                     </div>
                 </div>
-            </div>
-
-            <div class="invite-section">
-                <h3 style="color: var(--sakura-pink); font-size: 1.8rem; margin-bottom: 15px;">Thank You for Using Anime Bot!</h3>
-                <p style="margin-bottom: 20px; font-size: 1.1rem;">We're constantly working to improve the bot and add new features based on user feedback. Your support helps us keep the bot running smoothly!</p>
-                
-                <p style="margin-top: 20px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">
-                    Made with ❤️ by anime fans for anime fans
-                </p>
             </div>
         </div>
     </div>
 
-    <footer>
-        <p>© 2024 Anime Bot. All rights reserved.</p>
+    <footer class="footer">
+        <p>© <span id="currentYear">2024</span> Anime Bot. All rights reserved.</p>
         <p>This bot uses data from MyAnimeList, Anime News Network, and other publicly available sources.</p>
-        <p style="margin-top: 10px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.5);">
-            Anime images and characters belong to their respective owners. This is a fan-made project.
+        <p style="margin-top: 16px; color: var(--text-tertiary);">
+            Made with ❤️ by anime fans for anime fans
         </p>
     </footer>
 
     <script>
-        // Performance optimizations
-        let lastScrollTime = 0;
-        let animationFrameId = null;
-
-        // Tab Switching Functionality
+        // ===== SMOOTH ANIMATIONS & INTERACTIONS =====
+        
+        // Tab switching with smooth transitions
         document.querySelectorAll('.tab-btn').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // Remove active class from all buttons and contents
-                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                // Remove active class from all buttons
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Hide all tab contents with fade out
                 document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
                     content.style.opacity = '0';
                     content.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        content.classList.remove('active');
+                    }, 150);
                 });
                 
                 // Add active class to clicked button
                 this.classList.add('active');
                 
-                // Show corresponding content
+                // Show corresponding content with fade in
                 const tabId = this.getAttribute('data-tab');
                 const tabContent = document.getElementById(tabId);
                 if (tabContent) {
-                    tabContent.classList.add('active');
                     setTimeout(() => {
-                        tabContent.style.opacity = '1';
-                        tabContent.style.transform = 'translateY(0)';
-                        animateCards();
-                    }, 10);
-                }
-                
-                // Create sparkle effect
-                createSparkle(this);
-                
-                // Smooth scroll to top of content
-                if (tabContent) {
-                    const scrollOptions = { 
-                        behavior: 'smooth', 
-                        block: 'start' 
-                    };
-                    tabContent.scrollIntoView(scrollOptions);
+                        tabContent.classList.add('active');
+                        setTimeout(() => {
+                            tabContent.style.opacity = '1';
+                            tabContent.style.transform = 'translateY(0)';
+                            
+                            // Animate cards in the new tab
+                            animateCardsInView();
+                        }, 10);
+                    }, 150);
                 }
             });
         });
@@ -1751,166 +1130,170 @@
         document.getElementById('secondBotBtn').addEventListener('click', function(e) {
             e.preventDefault();
             window.open('https://discord.com/oauth2/authorize?client_id=1449643323500531812&permissions=8&integration_type=0&scope=bot+applications.commands', '_blank');
-            createSparkle(this);
-        });
-
-        // Create sparkle animation
-        function createSparkle(element) {
-            if (!element) return;
             
-            const rect = element.getBoundingClientRect();
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            sparkle.style.left = (rect.left + rect.width/2) + 'px';
-            sparkle.style.top = (rect.top + rect.height/2) + 'px';
-            document.body.appendChild(sparkle);
-            
+            // Add click feedback
+            this.style.transform = 'scale(0.95)';
             setTimeout(() => {
-                if (sparkle.parentNode) {
-                    sparkle.remove();
+                this.style.transform = '';
+            }, 150);
+        });
+
+        // Copy code functionality
+        document.querySelectorAll('.usage-code').forEach(codeBlock => {
+            codeBlock.addEventListener('click', async function() {
+                const text = this.textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    
+                    // Visual feedback
+                    const originalText = this.textContent;
+                    this.textContent = 'Copied! ✓';
+                    this.style.color = 'var(--accent-success)';
+                    this.style.background = 'rgba(87, 242, 135, 0.1)';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.color = 'var(--accent-warning)';
+                        this.style.background = 'rgba(0, 0, 0, 0.3)';
+                    }, 1500);
+                } catch (err) {
+                    console.error('Failed to copy:', err);
                 }
-            }, 1500);
+            });
+        });
+
+        // Animate cards when they come into view
+        function animateCardsInView() {
+            const cards = document.querySelectorAll('.command-card, .feature-card');
+            cards.forEach((card, index) => {
+                const rect = card.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (rect.top <= windowHeight * 0.85) {
+                    // Add animation delay for staggered effect
+                    card.style.animationDelay = `${index * 0.05}s`;
+                    card.classList.add('will-change');
+                }
+            });
         }
 
-        // Animate cards on load and tab switch
-        function animateCards() {
-            const now = Date.now();
-            if (now - lastScrollTime < 100) return;
-            lastScrollTime = now;
+        // Intersection Observer for smooth animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
 
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-            }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
 
-            animationFrameId = requestAnimationFrame(() => {
-                const cards = document.querySelectorAll('.command-card:not(.animated), .feature-card:not(.animated)');
-                cards.forEach((card, index) => {
-                    const rect = card.getBoundingClientRect();
-                    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-                    
-                    if (rect.top <= windowHeight * 0.85) {
-                        setTimeout(() => {
-                            card.classList.add('animated');
-                            card.style.transitionDelay = (index * 0.05) + 's';
-                        }, index * 50);
-                    }
+        // Observe all cards
+        document.querySelectorAll('.command-card, .feature-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Update current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Touch device optimizations
+        if ('ontouchstart' in window) {
+            document.body.classList.add('touch-device');
+            
+            // Better touch feedback
+            document.querySelectorAll('.tab-btn, .invite-btn, .second-bot-btn, .command-card, .feature-card').forEach(el => {
+                el.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                el.addEventListener('touchend', function() {
+                    this.style.transform = '';
                 });
             });
         }
 
-        // Initial animation
+        // Parallax effect on scroll
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        function updateParallax() {
+            const scrolled = window.scrollY;
+            const parallax = document.querySelector('.header');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+            lastScrollY = scrolled;
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+            
+            // Animate cards on scroll
+            animateCardsInView();
+        });
+
+        // Initialize animations on load
         document.addEventListener('DOMContentLoaded', () => {
-            // Update year in footer
-            const yearElements = document.querySelectorAll('footer p');
-            if (yearElements.length > 0) {
-                const currentYear = new Date().getFullYear();
-                yearElements[0].innerHTML = yearElements[0].innerHTML.replace('2024', currentYear);
-            }
-
             // Animate initial cards
-            setTimeout(animateCards, 300);
-
-            // Add copy functionality to code blocks
-            document.querySelectorAll('.usage-code').forEach(codeBlock => {
-                codeBlock.style.cursor = 'pointer';
-                codeBlock.title = 'Click to copy';
-                
-                codeBlock.addEventListener('click', function() {
-                    const text = this.textContent;
-                    navigator.clipboard.writeText(text).then(() => {
-                        const originalText = this.textContent;
-                        this.textContent = '✓ Copied!';
-                        this.style.color = 'var(--cyber-teal)';
-                        this.style.background = 'rgba(0, 229, 217, 0.1)';
-                        
-                        setTimeout(() => {
-                            this.textContent = originalText;
-                            this.style.color = 'var(--neon-yellow)';
-                            this.style.background = 'rgba(0, 0, 0, 0.5)';
-                        }, 1500);
-                    }).catch(err => {
-                        console.error('Failed to copy: ', err);
-                    });
-                });
-            });
-
-            // Add touch support for mobile
-            if ('ontouchstart' in window) {
-                document.body.classList.add('touch-device');
-                
-                // Improve touch feedback
-                document.querySelectorAll('.tab-btn, .invite-btn, .second-bot-btn').forEach(btn => {
-                    btn.addEventListener('touchstart', function() {
-                        this.style.transform = 'scale(0.98)';
+            setTimeout(animateCardsInView, 300);
+            
+            // Add smooth hover effects for desktop
+            if (!('ontouchstart' in window)) {
+                document.querySelectorAll('.command-card, .feature-card, .tab-btn, .invite-btn, .second-bot-btn').forEach(el => {
+                    el.addEventListener('mouseenter', function() {
+                        if (!this.classList.contains('active')) {
+                            this.style.transform = 'translateY(-4px) scale(1.02)';
+                        }
                     });
                     
-                    btn.addEventListener('touchend', function() {
-                        this.style.transform = '';
+                    el.addEventListener('mouseleave', function() {
+                        if (!this.classList.contains('active')) {
+                            this.style.transform = 'translateY(0) scale(1)';
+                        }
                     });
                 });
             }
-
-            // Smooth hover effects
-            document.querySelectorAll('.tab-btn, .invite-btn, .second-bot-btn').forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    if (!this.classList.contains('active')) {
-                        this.style.transform = 'translateY(-3px) scale(1.05)';
-                    }
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    if (!this.classList.contains('active')) {
-                        this.style.transform = 'translateY(0) scale(1)';
-                    }
-                });
-            });
         });
 
-        // Scroll animation
-        window.addEventListener('scroll', () => {
-            if (!animationFrameId) {
-                animationFrameId = requestAnimationFrame(() => {
-                    animateCards();
-                    animationFrameId = null;
-                });
-            }
-        });
-
-        // Random sparkle effect in background
-        function createRandomSparkle() {
-            if (Math.random() > 0.7) {
-                const sparkle = document.createElement('div');
-                sparkle.classList.add('sparkle');
-                sparkle.style.left = Math.random() * 100 + 'vw';
-                sparkle.style.top = Math.random() * 100 + 'vh';
-                document.body.appendChild(sparkle);
-                
-                setTimeout(() => {
-                    if (sparkle.parentNode) {
-                        sparkle.remove();
-                    }
-                }, 1500);
-            }
-        }
-
-        // Periodically create sparkles
-        setInterval(createRandomSparkle, 2000);
-
-        // Handle resize events
-        let resizeTimeout;
+        // Performance optimizations
         window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                animateCards();
-            }, 250);
+            clearTimeout(window.resizeTimeout);
+            window.resizeTimeout = setTimeout(animateCardsInView, 250);
         });
 
-        // Performance: Debounce scroll events
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(animateCards, 100);
-        });
+        // Reduced motion preference
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                el.style.transition = 'none';
+            });
+        }
     </script>
 </body>
 </html>
