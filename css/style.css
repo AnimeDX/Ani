@@ -3,6 +3,18 @@
   --dark: #0d1117;
   --card: #161b22;
   --gray: #8b949e;
+
+  /* 🌈 RAINBOW GRADIENT */
+  --rainbow: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  );
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -26,7 +38,16 @@ nav {
 
 .container { max-width: 1000px; margin: 0 auto; padding: 0 1.2rem; }
 
-.logo { font-size: 1.6rem; font-weight: bold; color: var(--primary); float: left; }
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  float: left;
+  background: var(--rainbow);
+  background-size: 400%;
+  animation: rainbow 7s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .nav-links {
   float: right;
@@ -60,7 +81,7 @@ h1 { font-size: 3.2rem; margin-bottom: 0.6rem; }
   margin: 0.8rem;
 }
 
-.btn:hover { background: #007acc; }
+.btn:hover { background: #0099ff; }
 
 section { padding: 6rem 0 4rem; }
 
@@ -127,4 +148,33 @@ footer {
 @media (max-width: 600px) {
   h1 { font-size: 2.5rem; }
   .nav-links a { margin-left: 0.8rem; font-size: 0.9rem; }
+}
+
+/* ===== RAINBOW TEXT ===== */
+.rainbow-text {
+  background: var(--rainbow);
+  background-size: 400%;
+  animation: rainbow 6s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== RAINBOW BACKGROUND ===== */
+.rainbow-bg {
+  background: var(--rainbow);
+  background-size: 400%;
+  animation: rainbow 6s linear infinite;
+  color: white;
+}
+
+/* ===== RAINBOW BORDER ===== */
+.rainbow-border {
+  border-left: 4px solid transparent;
+  border-image: var(--rainbow) 1;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes rainbow {
+  0% { background-position: 0%; }
+  100% { background-position: 400%; }
 }
