@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ani Bot - Commands</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo">Ani Commands Page</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="commands.html">Commands</a>
+        <a href="updates.html">Updates</a>
+        <a href="https://discord.gg/SRM4djGHa8" target="_blank">Discord</a>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </nav>
+
+  <section style="padding-top:9rem;">
+    <div class="container">
+      <h2>Commands</h2>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('slash')">Slash Commands (/)</button>
+        <button class="tab-btn" onclick="showTab('prefix')">Prefix Commands</button>
+        <button class="tab-btn" onclick="showTab('admin')">Admin / Owner</button>
+      </div>
+
+      <div id="slash" class="tab-content active">
+        <div class="command-grid">
+          <div class="command-item"><h3>/help</h3><p>Show help & commands</p></div>
+          <div class="command-item"><h3>/ping</h3><p>Check latency</p></div>
+          <div class="command-item"><h3>/invite</h3><p>Invite link</p></div>
+          <div class="command-item"><h3>/botstats</h3><p>Bot stats</p></div>
+          <div class="command-item"><h3>/donate</h3><p>Support bot</p></div>
+          <div class="command-item"><h3>/searchanime</h3><p>Search anime</p></div>
+          <div class="command-item"><h3>/searchcharacter</h3><p>Search character</p></div>
+          <div class="command-item"><h3>/animecharacters</h3><p>Anime characters</p></div>
+          <div class="command-item"><h3>/randomanime</h3><p>Random anime</p></div>
+          <div class="command-item"><h3>/schedule</h3><p>Weekly schedule</p></div>
+          <div class="command-item"><h3>/airing</h3><p>Currently airing</p></div>
+          <div class="command-item"><h3>/recommend</h3><p>Get a Anime Recommendations</p></div>
+          <div class="command-item"><h3>/animememe</h3><p>Random meme</p></div>
+          <div class="command-item"><h3>/suggest</h3><p>Send suggestion Send idea for the bot/report a problem</p></div>
+        </div>
+      </div>
+
+      <div id="prefix" class="tab-content">
+        <div class="command-grid">
+          <div class="command-item"><h3>?help / ?cmds</h3><p>Show help</p></div>
+          <div class="command-item"><h3>?anime / ?a</h3><p>Search anime</p></div>
+          <div class="command-item"><h3>?character / ?char</h3><p>Search character</p></div>
+          <div class="command-item"><h3>?characters / ?chars</h3><p>Anime characters</p></div>
+          <div class="command-item"><h3>?random / ?ranime</h3><p>Random anime</p></div>
+          <div class="command-item"><h3>?meme</h3><p>Anime meme</p></div>
+          <div class="command-item"><h3>?suggest</h3><p>Send idea for the bot/report a problem</p></div>
+          <!-- add more here -->
+        </div>
+      </div>
+
+      <div id="admin" class="tab-content">
+        <div class="command-grid">
+          <div class="command-item"><h3>/enablenews</h3><p>Enable news auto-post</p></div>
+          <div class="command-item"><h3>/disablenews</h3><p>Disable news auto-post</p></div>
+          <div class="command-item"><h3>/setprefix</h3><p>Set server prefix</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Ani Bot</p>
+    <p><a href="https://ko-fi.com/ani18" style="color:var(--primary);">Ko-fi</a> • <a href="https://paypal.me/anidx" style="color:var(--primary);">PayPal</a></p>
+  </footer>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
