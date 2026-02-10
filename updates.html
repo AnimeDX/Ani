@@ -6,126 +6,266 @@
   <title>Updates Page</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .main-content {
+      padding-top: 9rem;
+    }
+    
+    @media (max-width: 600px) {
+      .main-content {
+        padding-top: 6rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <nav>
     <div class="container">
       <div class="logo">Update page</div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="commands.html">Commands</a>
-        <a href="updates.html">Updates</a>
-        <a href="https://discord.gg/SRM4djGHa8" target="_blank">Discord</a>
+      <div class="nav-toggle">
+        <button class="nav-toggle-btn" id="navToggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
       <div class="clear"></div>
     </div>
   </nav>
 
-  <section style="padding-top:9rem;">
-    <div class="container">
-      <h2>Bot Updates</h2>
-      
-      <div class="update-item">
-      <strong>February 4 2026</strong>
-      <p><strong>Remove:</strong></p>
-      <ul style="margin-left: 20px; margin-top: 10px;">
-        <li><strong>/disablenews</strong></li>
-        <li><strong>/enablenews</br></strong>reason: news is broken and soon we will fix it.</li>
-  <ul style="margin-left: 20px;">
-      </ul>
-     </ul>
-   </div>
-      
-      <div class="update-item">
-      <strong>February 3 2026</strong>
-      <p><strong>Remove:</strong></p>
-      <ul style="margin-left: 20px; margin-top: 10px;">
-        <li><strong>/coundown</strong></li>
-  <ul style="margin-left: 20px;">
-      </ul>
-     </ul>
-   </div>
-      
-      <div class="update-item">
-      <strong>February 2 2026</strong>
-      <p><strong>Added:</strong></p>
-      <ul style="margin-left: 20px; margin-top: 10px;">
-        <li><strong>/upcomming</strong></li>
-  <ul style="margin-left: 20px;">
-      </ul>
-     </ul>
-   </div>
-      
-      <div class="update-item">
-      <strong>February 1 2026</strong>
-      <p><strong>Bug fixing:</strong></p>
-      <ul style="margin-left: 20px; margin-top: 10px;">
-        <li><strong>Fixed countdown date parsing</strong></li>
-        <li><strong>Improved rate limiting</strong></li>
-        <li><strong>Added proper emoji formatting</strong></li>
-  <ul style="margin-left: 20px;">
-      </ul>
-     </ul>
-   </div>
-   
-      <div class="update-item">
-  <strong>February 1 2026 - New Features Added</strong>
-  <ol style="margin-left: 20px; margin-top: 10px;">
-    <li><strong>Anime Similarity Finder Command (/similar &lt;anime&gt;)</strong><br>Finds anime similar to a given title<br>Uses recommendation data and genre similarity<br>Shows similarity scores and reasons</li>
-    <li><strong>Countdown System (/countdown)</strong><br>Create countdowns for anime episodes, releases, etc.<br>Visual progress bars with time remaining<br>Auto-refresh and delete functionality<br>Persistent storage across bot restarts</li>
-    <li><strong>Studio Works Command (/studioworks &lt;studio&gt;)</strong><br>Get all anime works by a specific studio<br>Works for studios like MAPPA, Ghibli, Kyoto Animation<br>Shows studio info and top works</li>
-    <li><strong>Anime Opening/Ending Theme Finder (/animethemes &lt;anime&gt;)</strong><br>Lists OP and ED themes for anime<br>Shows theme song titles<br>Perfect for music lovers</li>
-    <li><strong>Anime Staff/Creator Search (/staffsearch &lt;name&gt;)</strong><br>Find anime by director, writer, or staff<br>Shows positions and top works<br>Search for names like Hayao Miyazaki, Makoto Shinkai</li>
-    <li><strong>Anime Popularity Trends (/trends)</strong><br>Current season top anime<br>Upcoming season preview<br>All-time top rankings</li>
-    <li><strong>Anime Awards/Rankings (/awards)</strong><br>Top anime by category (airing, popular, favorite, movies, TV)<br>Shows rankings and scores<br>Great for discovery</li>
-    <li><strong>Anime Watch Time Calculator (/watchtime &lt;anime&gt;)</strong><br>Calculates how long to complete an anime<br>Multiple viewing schedule options<br>Shows total hours and days needed</li>
-    <li><strong>Enhanced Recommendations (/enhancedrec)</strong><br>Recommendations based on multiple anime inputs<br>Genre filtering support<br>Smart scoring system for better matches</li>
-  </ol>
-</div>
-
-    <div class="update-item">
-      <strong>February 1 2026</strong>
-      <p><strong>Key Changes Made:</strong></p>
-      <ul style="margin-left: 20px; margin-top: 10px;">
-        <li><strong>Fixed Random Anime Command:</strong> Enhanced /randomanime to accept optional genre parameter with choices:</li>
-        <ul style="margin-left: 20px;">
-          <li>/randomanime - Get completely random anime</li>
-          <li>/randomanime romance - Get random romance anime</li>
-          <li>Supports 12 genres: Action, Adventure, Comedy, Drama, Fantasy, Horror, Mystery, Romance, Sci-Fi, Slice of Life, Sports, Supernatural</li>
-        </ul>
-        <li><strong>Fixed Button Errors:</strong> Improved pagination button handling with better error checks</li>
-        <li><strong>Enhanced Prefix Commands:</strong> Updated ?random to accept genre parameter:</li>
-        <ul style="margin-left: 20px;">
-          <li>?random - Get random anime</li>
-          <li>?random romance - Get random romance anime</li>
-        </ul>
-      </ul>
-    </div>
-      
-      <div class="update-item">
-  <strong>Feb 1 2026</strong>
-  <p>News System
-added Anime Corner (animecorner.me)</p>
-</div>
-
-      <div class="update-item">
-        <strong>January 2026</strong>
-        <p>Added AFK system</p>
+  <div class="nav-popup" id="navPopup">
+    <div class="nav-popup-content">
+      <div class="nav-popup-header">
+        <h3>Navigation</h3>
+        <button class="nav-close-btn" id="navCloseBtn" aria-label="Close navigation menu">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
+      <div class="nav-popup-links">
+        <a href="index.html" class="popup-nav-link">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <a href="commands.html" class="popup-nav-link">
+          <i class="fas fa-terminal"></i> Commands
+        </a>
+        <a href="updates.html" class="popup-nav-link">
+          <i class="fas fa-sync-alt"></i> Updates
+        </a>
+        <a href="https://discord.gg/SRM4djGHa8" target="_blank" class="popup-nav-link">
+          <i class="fab fa-discord"></i> Discord
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="main-content">
+      <div class="container">
+        <h2>Bot Updates</h2>
+        
+        <div class="update-item">
+        <strong>February 4 2026</strong>
+        <p><strong>Remove:</strong></p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li><strong>/disablenews</strong></li>
+          <li><strong>/enablenews</br></strong>reason: news is broken and soon we will fix it.</li>
+    <ul style="margin-left: 20px;">
+        </ul>
+       </ul>
+     </div>
+        
+        <div class="update-item">
+        <strong>February 3 2026</strong>
+        <p><strong>Remove:</strong></p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li><strong>/coundown</strong></li>
+    <ul style="margin-left: 20px;">
+        </ul>
+       </ul>
+     </div>
+        
+        <div class="update-item">
+        <strong>February 2 2026</strong>
+        <p><strong>Added:</strong></p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li><strong>/upcomming</strong></li>
+    <ul style="margin-left: 20px;">
+        </ul>
+       </ul>
+     </div>
+        
+        <div class="update-item">
+        <strong>February 1 2026</strong>
+        <p><strong>Bug fixing:</strong></p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li><strong>Fixed countdown date parsing</strong></li>
+          <li><strong>Improved rate limiting</strong></li>
+          <li><strong>Added proper emoji formatting</strong></li>
+    <ul style="margin-left: 20px;">
+        </ul>
+       </ul>
+     </div>
+     
+        <div class="update-item">
+    <strong>February 1 2026 - New Features Added</strong>
+    <ol style="margin-left: 20px; margin-top: 10px;">
+      <li><strong>Anime Similarity Finder Command (/similar &lt;anime&gt;)</strong><br>Finds anime similar to a given title<br>Uses recommendation data and genre similarity<br>Shows similarity scores and reasons</li>
+      <li><strong>Countdown System (/countdown)</strong><br>Create countdowns for anime episodes, releases, etc.<br>Visual progress bars with time remaining<br>Auto-refresh and delete functionality<br>Persistent storage across bot restarts</li>
+      <li><strong>Studio Works Command (/studioworks &lt;studio&gt;)</strong><br>Get all anime works by a specific studio<br>Works for studios like MAPPA, Ghibli, Kyoto Animation<br>Shows studio info and top works</li>
+      <li><strong>Anime Opening/Ending Theme Finder (/animethemes &lt;anime&gt;)</strong><br>Lists OP and ED themes for anime<br>Shows theme song titles<br>Perfect for music lovers</li>
+      <li><strong>Anime Staff/Creator Search (/staffsearch &lt;name&gt;)</strong><br>Find anime by director, writer, or staff<br>Shows positions and top works<br>Search for names like Hayao Miyazaki, Makoto Shinkai</li>
+      <li><strong>Anime Popularity Trends (/trends)</strong><br>Current season top anime<br>Upcoming season preview<br>All-time top rankings</li>
+      <li><strong>Anime Awards/Rankings (/awards)</strong><br>Top anime by category (airing, popular, favorite, movies, TV)<br>Shows rankings and scores<br>Great for discovery</li>
+      <li><strong>Anime Watch Time Calculator (/watchtime &lt;anime&gt;)</strong><br>Calculates how long to complete an anime<br>Multiple viewing schedule options<br>Shows total hours and days needed</li>
+      <li><strong>Enhanced Recommendations (/enhancedrec)</strong><br>Recommendations based on multiple anime inputs<br>Genre filtering support<br>Smart scoring system for better matches</li>
+    </ol>
+  </div>
 
       <div class="update-item">
-        <strong>December 2025</strong>
-        <p>Initial release with anime search, memes and news</p>
+        <strong>February 1 2026</strong>
+        <p><strong>Key Changes Made:</strong></p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li><strong>Fixed Random Anime Command:</strong> Enhanced /randomanime to accept optional genre parameter with choices:</li>
+          <ul style="margin-left: 20px;">
+            <li>/randomanime - Get completely random anime</li>
+            <li>/randomanime romance - Get random romance anime</li>
+            <li>Supports 12 genres: Action, Adventure, Comedy, Drama, Fantasy, Horror, Mystery, Romance, Sci-Fi, Slice of Life, Sports, Supernatural</li>
+          </ul>
+          <li><strong>Fixed Button Errors:</strong> Improved pagination button handling with better error checks</li>
+          <li><strong>Enhanced Prefix Commands:</strong> Updated ?random to accept genre parameter:</li>
+          <ul style="margin-left: 20px;">
+            <li>?random - Get random anime</li>
+            <li>?random romance - Get random romance anime</li>
+          </ul>
+        </ul>
       </div>
+        
+        <div class="update-item">
+    <strong>Feb 1 2026</strong>
+    <p>News System
+  added Anime Corner (animecorner.me)</p>
+  </div>
 
-    </div>
-  </section>
+        <div class="update-item">
+          <strong>January 2026</strong>
+          <p>Added AFK system</p>
+        </div>
+
+        <div class="update-item">
+          <strong>December 2025</strong>
+          <p>Initial release with anime search, memes and news</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p>© 2025 Ani Bot • by Dx</p>
     <p><a href="https://ko-fi.com/ani18" style="color:var(--primary);">Ko-fi</a> • <a href="https://paypal.me/anidx" style="color:var(--primary);">PayPal</a></p>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggleBtn = document.getElementById('navToggle');
+      const navPopup = document.getElementById('navPopup');
+      const navCloseBtn = document.getElementById('navCloseBtn');
+      const body = document.body;
+      
+      function openMenu() {
+        navPopup.classList.add('active');
+        navToggleBtn.classList.add('active');
+        body.classList.add('menu-open');
+      }
+      
+      function closeMenu() {
+        navPopup.classList.remove('active');
+        navToggleBtn.classList.remove('active');
+        body.classList.remove('menu-open');
+      }
+      
+      if (navToggleBtn) {
+        navToggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          if (navPopup.classList.contains('active')) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+        
+        navToggleBtn.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          if (navPopup.classList.contains('active')) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+      }
+      
+      if (navCloseBtn) {
+        navCloseBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeMenu();
+        });
+        
+        navCloseBtn.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          closeMenu();
+        });
+      }
+      
+      const popupLinks = document.querySelectorAll('.popup-nav-link');
+      popupLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          closeMenu();
+        });
+        
+        link.addEventListener('touchstart', function(e) {
+          setTimeout(() => closeMenu(), 100);
+        });
+      });
+      
+      if (navPopup) {
+        navPopup.addEventListener('click', function(e) {
+          if (e.target === navPopup) {
+            closeMenu();
+          }
+        });
+      }
+      
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navPopup.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+      
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          closeMenu();
+        }
+      });
+      
+      document.addEventListener('touchmove', function(e) {
+        if (body.classList.contains('menu-open')) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+      
+      document.addEventListener('click', function(e) {
+        if (navPopup.classList.contains('active') && 
+            !navPopup.contains(e.target) && 
+            !navToggleBtn.contains(e.target)) {
+          closeMenu();
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>

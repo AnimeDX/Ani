@@ -6,169 +6,205 @@
   <title>Commands Page</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .main-content {
+      padding-top: 9rem;
+    }
+    
+    @media (max-width: 600px) {
+      .main-content {
+        padding-top: 6rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <nav>
     <div class="container">
       <div class="logo">Cmds Page</div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="commands.html">Commands</a>
-        <a href="updates.html">Updates</a>
-        <a href="https://discord.gg/SRM4djGHa8" target="_blank">Discord</a>
+      <div class="nav-toggle">
+        <button class="nav-toggle-btn" id="navToggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
       <div class="clear"></div>
     </div>
   </nav>
 
-  <section style="padding-top:9rem;">
-    <div class="container">
-      <h2>Commands</h2>
-
-      <div class="tabs">
-        <button class="tab-btn active" onclick="showTab('slash')">Slash Commands (/)</button>
-        <button class="tab-btn" onclick="showTab('prefix')">Prefix Commands</button>
-        <button class="tab-btn" onclick="showTab('admin')">Admin / Owner</button>
+  <div class="nav-popup" id="navPopup">
+    <div class="nav-popup-content">
+      <div class="nav-popup-header">
+        <h3>Navigation</h3>
+        <button class="nav-close-btn" id="navCloseBtn" aria-label="Close navigation menu">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
-
-      <div id="slash" class="tab-content active">
-        <div class="command-grid">
-          <div class="command-item"><h3>/help</h3><p>Show help & commands</p></div>
-          <div class="command-item"><h3>/ping</h3><p>Check latency</p></div>
-          <div class="command-item"><h3>/invite</h3><p>Invite link</p></div>
-          <div class="command-item"><h3>/botstats</h3><p>Bot stats</p></div>
-          <div class="command-item"><h3>/donate</h3><p>Support bot</p></div>
-          <div class="command-item"><h3>/searchanime</h3><p>Search anime</p></div>
-          <div class="command-item"><h3>/searchcharacter</h3><p>Search character</p></div>
-          <div class="command-item"><h3>/animecharacters</h3><p>Anime characters</p></div>
-          <div class="command-item"><h3>/randomanime</h3><p>Random anime</p></div>
-          <div class="command-item"><h3>/schedule</h3><p>Weekly schedule</p></div>
-          <div class="command-item"><h3>/airing</h3><p>Currently airing</p></div>
-          <div class="command-item"><h3>/recommend</h3><p>Get a Anime Recommendations</p></div>
-          <div class="command-item"><h3>/animememe</h3><p>Random meme</p></div>
-          <div class="command-item"><h3>/suggest</h3><p>Send suggestion Send idea for the bot/report a problem</p></div>
-          <div class="command-item">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.2em;">/update</h3>
-              <img src="https://i.imgur.com/NSQtvfc.png" 
-                   alt="Update Icon" 
-                   style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
-            </div>
-            <p>look at the bot new updates</p>
-          </div>
-          <div class="command-item">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.2em;">/similar</h3>
-              <img src="https://i.imgur.com/NSQtvfc.png" 
-                   alt="Update Icon" 
-                   style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
-            </div>
-            <p>Finds anime similar to a given title</p>
-          </div>
-          <div class="command-item">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.2em;">/studioworks</h3>
-              <img src="https://i.imgur.com/NSQtvfc.png" 
-                   alt="Update Icon" 
-                   style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
-            </div>
-            <p>Get all anime works by a specific studio</p>
-          </div>
-          <div class="command-item">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.2em;">/animethemes</h3>
-              <img src="https://i.imgur.com/NSQtvfc.png" 
-                   alt="Update Icon" 
-                   style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
-            </div>
-            <p>List OP and ED Themes for the anime</p>
-          </div>
-          <div class="command-item">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.2em;">/staffsearch</h3>
-              <img src="https://i.imgur.com/NSQtvfc.png" 
-                   alt="Update Icon" 
-                   style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
-            </div>
-            <p>Find anime by ditector, writer, or staff</p>
-          </div>
-          <div class="command-item">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.2em;">/trends</h3>
-              <img src="https://i.imgur.com/NSQtvfc.png" 
-                   alt="Update Icon" 
-                   style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
-            </div>
-            <p>Current season top anime, upcoming season preview</p>
-          </div>
-          <div class="command-item">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.2em;">/awards</h3>
-              <img src="https://i.imgur.com/NSQtvfc.png" 
-                   alt="Update Icon" 
-                   style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
-            </div>
-            <p>Top anime by category (airing, popular, favorite, movies, TV)</p>
-          </div>
-          <div class="command-item">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.2em;">/watchtime</h3>
-              <img src="https://i.imgur.com/NSQtvfc.png" 
-                   alt="Update Icon" 
-                   style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
-            </div>
-            <p>Calculates how long to complete an anime</p>
-          </div>
-          <div class="command-item">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.2em;">/enchancedrec</h3>
-              <img src="https://i.imgur.com/NSQtvfc.png" 
-                   alt="Update Icon" 
-                   style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
-            </div>
-            <p>Recommendations based on Multiple anime inputs</p>
-            </div>
-            <div class="command-item">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.2em;">/upcoming</h3>
-              <img src="https://i.imgur.com/NSQtvfc.png" 
-                   alt="Update Icon" 
-                   style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
-            </div>
-            <p>Shows what upcoming anime</p>
-          </div>
-        </div>
-      </div>
-
-      <div id="prefix" class="tab-content">
-        <div class="command-grid">
-          <div class="command-item"><h3>?help / ?cmds</h3><p>Show help</p></div>
-          <div class="command-item"><h3>?anime / ?a</h3><p>Search anime</p></div>
-          <div class="command-item"><h3>?character / ?char</h3><p>Search character</p></div>
-          <div class="command-item"><h3>?characters / ?chars</h3><p>Anime characters</p></div>
-          <div class="command-item"><h3>?random / ?ranime</h3><p>Random anime</p></div>
-          <div class="command-item"><h3>?meme</h3><p>Anime meme</p></div>
-          <div class="command-item"><h3>?suggest</h3><p>Send idea for the bot/report a problem</p></div>
-          <!-- add more here -->
-        </div>
-      </div>
-      
-      
-
-      <div id="admin" class="tab-content">
-        <div class="command-grid">
-          <div class="command-item"><h3>/enablenews   <img src="https://cdn3.emoji.gg/emojis/31334-bugs-blurple.png" 
-       alt="Update Icon" 
-       style="height: 1.2em; width: auto; border-radius: 4px; vertical-align: middle;"></h3><p>Enable news auto-post</p></div>
-          <div class="command-item"><h3>/disablenews   <img src="https://cdn3.emoji.gg/emojis/31334-bugs-blurple.png" 
-       alt="Update Icon" 
-       style="height: 1.2em; width: auto; border-radius: 4px; vertical-align: middle;"></h3><p>Disable news auto-post</p></div>
-          <div class="command-item"><h3>/setprefix</h3><p>Set server prefix</p></div>
-        </div>
+      <div class="nav-popup-links">
+        <a href="index.html" class="popup-nav-link">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <a href="commands.html" class="popup-nav-link">
+          <i class="fas fa-terminal"></i> Commands
+        </a>
+        <a href="updates.html" class="popup-nav-link">
+          <i class="fas fa-sync-alt"></i> Updates
+        </a>
+        <a href="https://discord.gg/SRM4djGHa8" target="_blank" class="popup-nav-link">
+          <i class="fab fa-discord"></i> Discord
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+
+  <main>
+    <section class="main-content">
+      <div class="container">
+        <h2>Commands</h2>
+
+        <div class="tabs">
+          <button class="tab-btn active" onclick="showTab('slash')" aria-selected="true">Slash Commands (/)</button>
+          <button class="tab-btn" onclick="showTab('prefix')" aria-selected="false">Prefix Commands</button>
+          <button class="tab-btn" onclick="showTab('admin')" aria-selected="false">Admin / Owner</button>
+        </div>
+
+        <div id="slash" class="tab-content active">
+          <div class="command-grid">
+            <div class="command-item"><h3>/help</h3><p>Show help & commands</p></div>
+            <div class="command-item"><h3>/ping</h3><p>Check latency</p></div>
+            <div class="command-item"><h3>/invite</h3><p>Invite link</p></div>
+            <div class="command-item"><h3>/botstats</h3><p>Bot stats</p></div>
+            <div class="command-item"><h3>/donate</h3><p>Support bot</p></div>
+            <div class="command-item"><h3>/searchanime</h3><p>Search anime</p></div>
+            <div class="command-item"><h3>/searchcharacter</h3><p>Search character</p></div>
+            <div class="command-item"><h3>/animecharacters</h3><p>Anime characters</p></div>
+            <div class="command-item"><h3>/randomanime</h3><p>Random anime</p></div>
+            <div class="command-item"><h3>/schedule</h3><p>Weekly schedule</p></div>
+            <div class="command-item"><h3>/airing</h3><p>Currently airing</p></div>
+            <div class="command-item"><h3>/recommend</h3><p>Get a Anime Recommendations</p></div>
+            <div class="command-item"><h3>/animememe</h3><p>Random meme</p></div>
+            <div class="command-item"><h3>/suggest</h3><p>Send suggestion Send idea for the bot/report a problem</p></div>
+            <div class="command-item">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <h3 style="margin: 0; font-size: 1.2em;">/update</h3>
+                <img src="https://i.imgur.com/NSQtvfc.png" 
+                     alt="Update Icon" 
+                     style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
+              </div>
+              <p>look at the bot new updates</p>
+            </div>
+            <div class="command-item">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <h3 style="margin: 0; font-size: 1.2em;">/similar</h3>
+                <img src="https://i.imgur.com/NSQtvfc.png" 
+                     alt="Update Icon" 
+                     style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
+              </div>
+              <p>Finds anime similar to a given title</p>
+            </div>
+            <div class="command-item">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <h3 style="margin: 0; font-size: 1.2em;">/studioworks</h3>
+                <img src="https://i.imgur.com/NSQtvfc.png" 
+                     alt="Update Icon" 
+                     style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
+              </div>
+              <p>Get all anime works by a specific studio</p>
+            </div>
+            <div class="command-item">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <h3 style="margin: 0; font-size: 1.2em;">/animethemes</h3>
+                <img src="https://i.imgur.com/NSQtvfc.png" 
+                     alt="Update Icon" 
+                     style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
+              </div>
+              <p>List OP and ED Themes for the anime</p>
+            </div>
+            <div class="command-item">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <h3 style="margin: 0; font-size: 1.2em;">/staffsearch</h3>
+                <img src="https://i.imgur.com/NSQtvfc.png" 
+                     alt="Update Icon" 
+                     style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
+              </div>
+              <p>Find anime by ditector, writer, or staff</p>
+            </div>
+            <div class="command-item">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <h3 style="margin: 0; font-size: 1.2em;">/trends</h3>
+                <img src="https://i.imgur.com/NSQtvfc.png" 
+                     alt="Update Icon" 
+                     style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
+              </div>
+              <p>Current season top anime, upcoming season preview</p>
+            </div>
+            <div class="command-item">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <h3 style="margin: 0; font-size: 1.2em;">/awards</h3>
+                <img src="https://i.imgur.com/NSQtvfc.png" 
+                     alt="Update Icon" 
+                     style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
+              </div>
+              <p>Top anime by category (airing, popular, favorite, movies, TV)</p>
+            </div>
+            <div class="command-item">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <h3 style="margin: 0; font-size: 1.2em;">/watchtime</h3>
+                <img src="https://i.imgur.com/NSQtvfc.png" 
+                     alt="Update Icon" 
+                     style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
+              </div>
+              <p>Calculates how long to complete an anime</p>
+            </div>
+            <div class="command-item">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <h3 style="margin: 0; font-size: 1.2em;">/enchancedrec</h3>
+                <img src="https://i.imgur.com/NSQtvfc.png" 
+                     alt="Update Icon" 
+                     style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
+              </div>
+              <p>Recommendations based on Multiple anime inputs</p>
+              </div>
+              <div class="command-item">
+              <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <h3 style="margin: 0; font-size: 1.2em;">/upcoming</h3>
+                <img src="https://i.imgur.com/NSQtvfc.png" 
+                     alt="Update Icon" 
+                     style="height: 2em; width: auto; border-radius: 4px; vertical-align: middle;">
+              </div>
+              <p>Shows what upcoming anime</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="prefix" class="tab-content">
+          <div class="command-grid">
+            <div class="command-item"><h3>?help / ?cmds</h3><p>Show help</p></div>
+            <div class="command-item"><h3>?anime / ?a</h3><p>Search anime</p></div>
+            <div class="command-item"><h3>?character / ?char</h3><p>Search character</p></div>
+            <div class="command-item"><h3>?characters / ?chars</h3><p>Anime characters</p></div>
+            <div class="command-item"><h3>?random / ?ranime</h3><p>Random anime</p></div>
+            <div class="command-item"><h3>?meme</h3><p>Anime meme</p></div>
+            <div class="command-item"><h3>?suggest</h3><p>Send idea for the bot/report a problem</p></div>
+          </div>
+        </div>
+        
+        <div id="admin" class="tab-content">
+          <div class="command-grid">
+            <div class="command-item"><h3>/enablenews   <img src="https://cdn3.emoji.gg/emojis/31334-bugs-blurple.png" 
+         alt="Update Icon" 
+         style="height: 1.2em; width: auto; border-radius: 4px; vertical-align: middle;"></h3><p>Enable news auto-post</p></div>
+            <div class="command-item"><h3>/disablenews   <img src="https://cdn3.emoji.gg/emojis/31334-bugs-blurple.png" 
+         alt="Update Icon" 
+         style="height: 1.2em; width: auto; border-radius: 4px; vertical-align: middle;"></h3><p>Disable news auto-post</p></div>
+            <div class="command-item"><h3>/setprefix</h3><p>Set server prefix</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p>© 2025 Ani Bot</p>
@@ -176,12 +212,124 @@
   </footer>
 
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggleBtn = document.getElementById('navToggle');
+      const navPopup = document.getElementById('navPopup');
+      const navCloseBtn = document.getElementById('navCloseBtn');
+      const body = document.body;
+      
+      function openMenu() {
+        navPopup.classList.add('active');
+        navToggleBtn.classList.add('active');
+        body.classList.add('menu-open');
+      }
+      
+      function closeMenu() {
+        navPopup.classList.remove('active');
+        navToggleBtn.classList.remove('active');
+        body.classList.remove('menu-open');
+      }
+      
+      if (navToggleBtn) {
+        navToggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          if (navPopup.classList.contains('active')) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+        
+        navToggleBtn.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          if (navPopup.classList.contains('active')) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+      }
+      
+      if (navCloseBtn) {
+        navCloseBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeMenu();
+        });
+        
+        navCloseBtn.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          closeMenu();
+        });
+      }
+      
+      const popupLinks = document.querySelectorAll('.popup-nav-link');
+      popupLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          closeMenu();
+        });
+        
+        link.addEventListener('touchstart', function(e) {
+          setTimeout(() => closeMenu(), 100);
+        });
+      });
+      
+      if (navPopup) {
+        navPopup.addEventListener('click', function(e) {
+          if (e.target === navPopup) {
+            closeMenu();
+          }
+        });
+      }
+      
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navPopup.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+      
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          closeMenu();
+        }
+      });
+      
+      document.addEventListener('touchmove', function(e) {
+        if (body.classList.contains('menu-open')) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+      
+      document.addEventListener('click', function(e) {
+        if (navPopup.classList.contains('active') && 
+            !navPopup.contains(e.target) && 
+            !navToggleBtn.contains(e.target)) {
+          closeMenu();
+        }
+      });
+    });
+    
     function showTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('active');
+        el.setAttribute('aria-selected', 'false');
+      });
+      
       document.getElementById(tabId).classList.add('active');
       event.target.classList.add('active');
+      event.target.setAttribute('aria-selected', 'true');
     }
+    
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        showTab(this.getAttribute('onclick').match(/'(.*?)'/)[1]);
+      });
+    });
   </script>
+
 </body>
 </html>
