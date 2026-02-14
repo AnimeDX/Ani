@@ -1155,8 +1155,6 @@ footer a:focus::after {
 .command-item:nth-child(20) { --item-index: 20; }
 .command-item:nth-child(21) { --item-index: 21; }
 .command-item:nth-child(22) { --item-index: 22; }
-.command-item:nth-child(23) { --item-index: 23; }
-.command-item:nth-child(24) { --item-index: 24; }
 
 .update-item {
   animation-delay: calc(var(--update-index, 0) * 0.15s);
@@ -1173,6 +1171,7 @@ footer a:focus::after {
 .update-item:nth-child(9) { --update-index: 9; }
 .update-item:nth-child(10) { --update-index: 10; }
 .update-item:nth-child(11) { --update-index: 11; }
+.update-item:nth-child(12) { --update-index: 12; }
 
 .command-item,
 .update-item,
