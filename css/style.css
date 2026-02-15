@@ -1155,6 +1155,12 @@ footer a:focus::after {
 .command-item:nth-child(20) { --item-index: 20; }
 .command-item:nth-child(21) { --item-index: 21; }
 .command-item:nth-child(22) { --item-index: 22; }
+.command-item:nth-child(23) { --item-index: 23; }
+.command-item:nth-child(24) { --item-index: 24; }
+.command-item:nth-child(25) { --item-index: 25; }
+.command-item:nth-child(26) { --item-index: 26; }
+.command-item:nth-child(27) { --item-index: 27; }
+.command-item:nth-child(28) { --item-index: 28; }
 
 .update-item {
   animation-delay: calc(var(--update-index, 0) * 0.15s);
@@ -1173,6 +1179,7 @@ footer a:focus::after {
 .update-item:nth-child(11) { --update-index: 11; }
 .update-item:nth-child(12) { --update-index: 12; }
 .update-item:nth-child(13) { --update-index: 13; }
+.update-item:nth-child(14) { --update-index: 14; }
 
 .command-item,
 .update-item,
