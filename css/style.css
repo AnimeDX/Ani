@@ -1180,6 +1180,7 @@ footer a:focus::after {
 .update-item:nth-child(12) { --update-index: 12; }
 .update-item:nth-child(13) { --update-index: 13; }
 .update-item:nth-child(14) { --update-index: 14; }
+.update-item:nth-child(15) { --update-index: 15; }
 
 .command-item,
 .update-item,
